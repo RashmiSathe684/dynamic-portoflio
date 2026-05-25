@@ -132,7 +132,7 @@ export default function AdminInternships() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           onSubmit={handleSubmit}
-          className="space-y-8 bg-brand-surface border border-brand-border/60 p-8 rounded-3xl"
+          className="space-y-8 bg-brand-surface border border-brand-border/60 p-4 sm:p-8 rounded-3xl"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="md:col-span-2 space-y-2">
@@ -235,14 +235,14 @@ export default function AdminInternships() {
             </div>
           </div>
 
-          <div className="flex gap-4">
-            <button className="px-8 py-4 bg-brand-primary text-white rounded-2xl font-bold shadow-lg shadow-brand-primary/20 hover:shadow-xl transition-all">
+          <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <button className="w-full sm:w-auto px-6 py-3.5 sm:px-8 sm:py-4 bg-brand-primary text-white rounded-2xl font-bold shadow-lg shadow-brand-primary/20 hover:shadow-xl transition-all text-sm sm:text-base">
               {editId ? 'Update Internship' : 'Save Internship'}
             </button>
             <button
               type="button"
               onClick={resetForm}
-              className="px-8 py-4 bg-brand-bg/80 text-brand-gray border border-brand-border rounded-2xl font-bold hover:bg-brand-bg transition-all"
+              className="w-full sm:w-auto px-6 py-3.5 sm:px-8 sm:py-4 bg-brand-bg/80 text-brand-gray border border-brand-border rounded-2xl font-bold hover:bg-brand-bg transition-all text-sm sm:text-base"
             >
               Cancel
             </button>

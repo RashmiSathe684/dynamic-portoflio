@@ -221,18 +221,18 @@ export default function AdminProjects() {
             </div>
           </div>
 
-          <div className="flex gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <button
               type="submit"
               disabled={loading}
-              className="px-8 py-4 bg-brand-primary text-white rounded-2xl font-bold shadow-lg shadow-brand-primary/20 hover:shadow-xl transition-all disabled:opacity-50"
+              className="w-full sm:w-auto px-6 py-3.5 sm:px-8 sm:py-4 bg-brand-primary text-white rounded-2xl font-bold shadow-lg shadow-brand-primary/20 hover:shadow-xl transition-all disabled:opacity-50 text-sm sm:text-base"
             >
               {loading ? 'Processing...' : editId ? 'Update Project' : 'Save Project'}
             </button>
             <button
               type="button"
               onClick={resetForm}
-              className="px-8 py-4 bg-brand-bg/80 text-brand-gray border border-brand-border rounded-2xl font-bold hover:bg-brand-bg transition-all"
+              className="w-full sm:w-auto px-6 py-3.5 sm:px-8 sm:py-4 bg-brand-bg/80 text-brand-gray border border-brand-border rounded-2xl font-bold hover:bg-brand-bg transition-all text-sm sm:text-base"
             >
               Cancel
             </button>
