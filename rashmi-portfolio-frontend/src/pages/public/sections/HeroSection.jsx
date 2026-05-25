@@ -17,39 +17,6 @@ export default function HeroSection({ onPreview }) {
     setImageError(false);
   }, [profile.profilePhotoUrl]);
 
-  const handleDownload = async (e) => {
-    e.preventDefault();
-    if (!profile.resumeUrl) return;
-
-    try {
-      const url = resolveUrl(profile.resumeUrl);
-      const response = await fetch(url);
-      const blob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
-      
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      
-      // Smart filename extraction supporting both Cloudinary and local uploads
-      let originalName = 'Rashmi_Sathe_Resume.pdf';
-      if (profile.resumeUrl) {
-        const lastSlash = profile.resumeUrl.lastIndexOf('/');
-        const filename = lastSlash !== -1 ? profile.resumeUrl.substring(lastSlash + 1) : profile.resumeUrl;
-        const underscoreIdx = filename.indexOf('_');
-        originalName = underscoreIdx !== -1 ? filename.substring(underscoreIdx + 1) : filename;
-      }
-      
-      link.setAttribute('download', originalName);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(blobUrl);
-    } catch (err) {
-      console.error('Download failed:', err);
-      window.open(resolveUrl(profile.resumeUrl), '_blank');
-    }
-  };
-
   const photoSrc = (!imageError && profile.profilePhotoUrl) ? resolveUrl(profile.profilePhotoUrl) : '';
 
   return (
@@ -116,12 +83,20 @@ export default function HeroSection({ onPreview }) {
         
         {/* Exactly 3 buttons */}
         <div className="hero-actions flex gap-3.5 flex-wrap justify-center items-center select-none">
-          <button 
-            onClick={handleDownload}
+          <a 
+            href={profile.resumeUrl ? resolveUrl(profile.resumeUrl) : '#'}
+            target="_blank"
+            rel="noreferrer"
             className="btn-glow inline-flex items-center gap-2 text-white border-none cursor-pointer"
+            onClick={(e) => {
+              if (!profile.resumeUrl) {
+                e.preventDefault();
+                alert('No resume uploaded yet.');
+              }
+            }}
           >
-            ⬇ Download Resume
-          </button>
+            👁 View Resume
+          </a>
           <a 
             href="https://github.com/RashmiSathe684" 
             target="_blank" 
