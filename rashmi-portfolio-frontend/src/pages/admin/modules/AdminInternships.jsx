@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FiPlus, FiTrash2, FiClock, FiBriefcase, FiEdit, FiFileText } from 'react-icons/fi';
+import { FiPlus, FiClock, FiBriefcase, FiFileText } from 'react-icons/fi';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 import { getInternships, createInternship, updateInternship, deleteInternship, uploadInternshipFile, resolveUrl, sortItemsByDate } from '../../../api/services';
 
 export default function AdminInternships() {
@@ -249,45 +250,98 @@ export default function AdminInternships() {
         </motion.form>
       )}
 
-      <div className="grid grid-cols-1 gap-4">
+      <div className="space-y-4">
         {loading ? (
           <div className="text-center py-6 text-brand-muted text-sm">Loading...</div>
         ) : internships.length === 0 ? (
           <div className="text-center py-6 text-brand-muted text-sm">No internships found.</div>
         ) : (
-          internships.map((intern) => (
-            <div key={intern.id} className="bg-brand-surface border border-brand-border rounded-2xl p-5 flex items-start justify-between group hover:border-brand-primary/30 transition-all">
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-brand-bg/80 border border-brand-border/40 rounded-xl flex items-center justify-center text-brand-primary text-xl">
-                  <FiBriefcase />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h4 className="font-bold text-text-main">{intern.title}</h4>
-                    <span className="text-[9px] font-bold px-2 py-0.5 bg-brand-bg text-brand-gray border border-brand-border/40 rounded-full uppercase tracking-tighter">{intern.type}</span>
+          <>
+            {/* Mobile View: Card List */}
+            <div className="block md:hidden space-y-4">
+              {internships.map((intern) => (
+                <div key={intern.id} className="p-4 bg-brand-surface border border-brand-border/60 rounded-2xl space-y-2 shadow-sm">
+                  <div className="flex justify-between items-start gap-2">
+                    <div>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <h4 className="font-bold text-text-main text-sm">{intern.title}</h4>
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 bg-brand-bg text-brand-gray border border-brand-border/40 rounded-full uppercase tracking-tighter shrink-0">{intern.type}</span>
+                      </div>
+                      <p className="text-brand-primary text-xs font-semibold mt-0.5">{intern.company}</p>
+                      <p className="text-brand-gray text-[11px] mt-1 line-clamp-2">{intern.description}</p>
+                    </div>
+                    <div className="flex gap-1 shrink-0">
+                      <button
+                        onClick={() => handleEdit(intern)}
+                        className="p-2 text-brand-primary hover:bg-brand-primary/10 rounded-lg transition-all"
+                      >
+                        <FaEdit size={14} />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(intern.id)}
+                        className="p-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
+                      >
+                        <FaTrash size={14} />
+                      </button>
+                    </div>
                   </div>
-                  <p className="text-sm text-brand-primary font-semibold">{intern.company}</p>
-                  <div className="flex items-center gap-3 mt-1 text-brand-muted text-xs">
-                    <span className="flex items-center gap-1"><FiClock /> {intern.duration}</span>
+                  <div className="text-[11px] text-brand-muted font-medium pt-1.5 border-t border-brand-border/40 flex items-center gap-1">
+                    <FiClock size={12} /> {intern.duration}
                   </div>
                 </div>
-              </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handleEdit(intern)}
-                  className="p-2 text-brand-muted hover:text-brand-primary hover:bg-brand-primary/10 rounded-lg transition-all"
-                >
-                  <FiEdit />
-                </button>
-                <button
-                  onClick={() => handleDelete(intern.id)}
-                  className="p-2 text-brand-muted hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
-                >
-                  <FiTrash2 />
-                </button>
-              </div>
+              ))}
             </div>
-          ))
+
+            {/* Desktop View: Table */}
+            <div className="hidden md:block overflow-hidden border border-brand-border rounded-[24px] bg-brand-surface">
+              <table className="w-full text-sm text-left">
+                <thead className="text-xs text-brand-muted uppercase bg-brand-bg/60 border-b border-brand-border">
+                  <tr>
+                    <th className="px-6 py-4">Role & Company</th>
+                    <th className="px-6 py-4">Duration & Type</th>
+                    <th className="px-6 py-4">Location</th>
+                    <th className="px-6 py-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-brand-border/40">
+                  {internships.map((intern) => (
+                    <tr key={intern.id} className="hover:bg-brand-bg/40 transition-colors">
+                      <td className="px-6 py-4">
+                        <p className="font-bold text-text-main">{intern.title}</p>
+                        <p className="text-brand-primary text-xs font-semibold">{intern.company}</p>
+                        <p className="text-brand-gray text-xs line-clamp-1 max-w-md mt-0.5">{intern.description}</p>
+                      </td>
+                      <td className="px-6 py-4 text-brand-gray font-medium">
+                        <div className="flex flex-col gap-1">
+                          <span className="flex items-center gap-1 text-xs text-brand-muted"><FiClock size={12} /> {intern.duration}</span>
+                          <span className="text-[9px] font-bold px-1.5 py-0.5 bg-brand-bg text-brand-gray border border-brand-border/40 rounded-full uppercase tracking-tighter w-fit">{intern.type}</span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-brand-gray text-xs">
+                        {intern.location || '—'}
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <div className="flex justify-end gap-2">
+                          <button
+                            onClick={() => handleEdit(intern)}
+                            className="p-2 text-brand-primary hover:bg-brand-primary/10 rounded-lg transition-all"
+                          >
+                            <FaEdit size={16} />
+                          </button>
+                          <button
+                            onClick={() => handleDelete(intern.id)}
+                            className="p-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
+                          >
+                            <FaTrash size={16} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
       </div>
     </div>
