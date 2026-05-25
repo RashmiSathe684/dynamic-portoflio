@@ -9,6 +9,7 @@ export default function AdminProfile() {
   const [resumeFile, setResumeFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState('');
+  const [photoError, setPhotoError] = useState(false);
 
   const fetchSettings = useCallback(() => {
     getProfileSettings()
@@ -23,6 +24,10 @@ export default function AdminProfile() {
   useEffect(() => {
     fetchSettings();
   }, [fetchSettings]);
+
+  useEffect(() => {
+    setPhotoError(false);
+  }, [settings.profilePhotoUrl]);
 
   const handleUpload = async (type) => {
     const file = type === 'photo' ? photoFile : resumeFile;
@@ -70,8 +75,13 @@ export default function AdminProfile() {
           </div>
           
           <div className="w-32 h-32 mx-auto rounded-2xl overflow-hidden border-4 border-brand-border shadow-md bg-brand-bg/40 flex items-center justify-center">
-            {settings.profilePhotoUrl ? (
-              <img src={resolveUrl(settings.profilePhotoUrl)} alt="Profile" className="w-full h-full object-cover" />
+            {settings.profilePhotoUrl && !photoError ? (
+              <img 
+                src={resolveUrl(settings.profilePhotoUrl)} 
+                alt="Profile" 
+                className="w-full h-full object-cover" 
+                onError={() => setPhotoError(true)}
+              />
             ) : (
               <FiUser size={32} className="text-brand-muted" />
             )}

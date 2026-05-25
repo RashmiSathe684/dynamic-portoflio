@@ -42,7 +42,7 @@ export default function ProjectsSection({ onPreview }) {
       <div className="eyebrow block text-[11px] font-bold uppercase tracking-[2.5px] text-accent mb-2">
         Projects
       </div>
-      <h2 className="sec-title font-[Space Grotesk] text-[clamp(26px,3vw,40px)] font-bold tracking-[-1px] text-text-main mb-6">
+      <h2 className="sec-title font-display text-[clamp(26px,3vw,40px)] font-bold tracking-[-1px] text-text-main mb-6">
         Featured Works
       </h2>
 
@@ -92,7 +92,7 @@ export default function ProjectsSection({ onPreview }) {
               <div className="pj-body p-5 flex-1 flex flex-col justify-between">
                 <div>
                   <div className="pj-top flex justify-between items-start gap-2 mb-2">
-                    <h3 className="pj-title font-[Space Grotesk] text-[16px] font-bold text-text-main leading-[1.2]">
+                    <h3 className="pj-title font-display text-[16px] font-bold text-text-main leading-[1.2]">
                       {project.title}
                     </h3>
                     <span className="pj-date text-[11px] text-brand-muted uppercase tracking-wider whitespace-nowrap">

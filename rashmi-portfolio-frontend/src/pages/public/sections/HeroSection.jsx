@@ -3,6 +3,7 @@ import { getProfileSettings, resolveUrl } from '../../../api/services';
 
 export default function HeroSection({ onPreview }) {
   const [profile, setProfile] = useState({ resumeUrl: '', profilePhotoUrl: '' });
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     getProfileSettings()
@@ -11,6 +12,10 @@ export default function HeroSection({ onPreview }) {
       })
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [profile.profilePhotoUrl]);
 
   const handleDownload = async (e) => {
     e.preventDefault();
@@ -24,7 +29,16 @@ export default function HeroSection({ onPreview }) {
       
       const link = document.createElement('a');
       link.href = blobUrl;
-      const originalName = profile.resumeUrl.substring(profile.resumeUrl.indexOf('_') + 1) || 'Rashmi_Sathe_Resume.pdf';
+      
+      // Smart filename extraction supporting both Cloudinary and local uploads
+      let originalName = 'Rashmi_Sathe_Resume.pdf';
+      if (profile.resumeUrl) {
+        const lastSlash = profile.resumeUrl.lastIndexOf('/');
+        const filename = lastSlash !== -1 ? profile.resumeUrl.substring(lastSlash + 1) : profile.resumeUrl;
+        const underscoreIdx = filename.indexOf('_');
+        originalName = underscoreIdx !== -1 ? filename.substring(underscoreIdx + 1) : filename;
+      }
+      
       link.setAttribute('download', originalName);
       document.body.appendChild(link);
       link.click();
@@ -36,7 +50,7 @@ export default function HeroSection({ onPreview }) {
     }
   };
 
-  const photoSrc = resolveUrl(profile.profilePhotoUrl) || '';
+  const photoSrc = (!imageError && profile.profilePhotoUrl) ? resolveUrl(profile.profilePhotoUrl) : '';
 
   return (
     <section 
@@ -70,6 +84,7 @@ export default function HeroSection({ onPreview }) {
                 src={photoSrc} 
                 alt="Rashmi Sathe" 
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                onError={() => setImageError(true)}
               />
             ) : (
               <div className="text-[58px] select-none animate-[pulse_2s_infinite]">👩‍💻</div>
@@ -89,7 +104,7 @@ export default function HeroSection({ onPreview }) {
         </div>
         
         {/* Heading */}
-        <h1 className="hero-h1 font-[Space Grotesk] text-[clamp(32px,5.5vw,56px)] font-bold leading-[1.1] tracking-[-2px] text-text-main mb-6">
+        <h1 className="hero-h1 font-display text-[clamp(32px,5.5vw,56px)] font-bold leading-[1.1] tracking-[-2px] text-text-main mb-6">
           Full Stack Development<br />
           with <span className="grad bg-clip-text text-transparent bg-gradient-to-r from-accent to-cyan font-bold">Java &amp; React</span>
         </h1>

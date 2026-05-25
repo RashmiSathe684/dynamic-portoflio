@@ -27,14 +27,14 @@ export default function ContactSection() {
       <div className="eyebrow block text-[11px] font-bold uppercase tracking-[2.5px] text-accent mb-2">
         Contact
       </div>
-      <h2 className="sec-title font-[Space Grotesk] text-[clamp(26px,3vw,40px)] font-bold tracking-[-1px] text-text-main mb-10">
+      <h2 className="sec-title font-display text-[clamp(26px,3vw,40px)] font-bold tracking-[-1px] text-text-main mb-10">
         Connect With Me
       </h2>
 
       <div className="contact-grid grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 items-start">
         {/* Left Column Direct Info */}
         <div className="select-text">
-          <div className="contact-title font-[Space Grotesk] text-[clamp(32px,3.5vw,48px)] font-bold leading-[1.05] tracking-[-2.5px] text-text-main mb-4">
+          <div className="contact-title font-display text-[clamp(32px,3.5vw,48px)] font-bold leading-[1.05] tracking-[-2.5px] text-text-main mb-4">
             Have an opportunity? <br />
             <span className="grad bg-clip-text text-transparent bg-gradient-to-r from-accent to-cyan font-bold">
               I'd love to hear from you.

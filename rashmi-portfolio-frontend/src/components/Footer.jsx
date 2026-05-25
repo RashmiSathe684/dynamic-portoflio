@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-9 border-b border-brand-border mb-6">
           {/* Col 1 */}
           <div>
-            <div className="footer-logo font-[Space Grotesk] font-bold text-[26px] mb-3 bg-clip-text text-transparent bg-gradient-to-r from-accent to-cyan select-none">
+            <div className="footer-logo font-display font-bold text-[26px] mb-3 bg-clip-text text-transparent bg-gradient-to-r from-accent to-cyan select-none">
               RS.
             </div>
             <p className="footer-desc text-[13.5px] text-brand-gray leading-[1.75] max-w-[280px] mb-5">

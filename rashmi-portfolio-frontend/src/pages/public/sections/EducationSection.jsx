@@ -88,7 +88,7 @@ export default function EducationSection() {
       <div className="eyebrow block text-[11px] font-bold uppercase tracking-[2.5px] text-accent mb-2">
         Education
       </div>
-      <h2 className="sec-title font-[Space Grotesk] text-[clamp(26px,3vw,40px)] font-bold tracking-[-1px] text-text-main mb-10">
+      <h2 className="sec-title font-display text-[clamp(26px,3vw,40px)] font-bold tracking-[-1px] text-text-main mb-10">
         Academic Journey
       </h2>
 
@@ -110,7 +110,7 @@ export default function EducationSection() {
 
               {/* Title & Organization info */}
               <div>
-                <h3 className="edu-deg font-[Space Grotesk] text-[15px] font-bold text-text-main">
+                <h3 className="edu-deg font-display text-[15px] font-bold text-text-main">
                   {edu.degree}
                 </h3>
                 <div className="edu-col text-[13px] text-brand-muted mt-0.5">
@@ -120,7 +120,7 @@ export default function EducationSection() {
 
               {/* Score & Duration */}
               <div className="select-none">
-                <div className="edu-score font-[Space Grotesk] text-[22px] font-bold text-accent text-right">
+                <div className="edu-score font-display text-[22px] font-bold text-accent text-right">
                   {edu.score}
                 </div>
                 <div className="edu-yr text-[12px] text-brand-muted text-right mt-1 whitespace-nowrap">

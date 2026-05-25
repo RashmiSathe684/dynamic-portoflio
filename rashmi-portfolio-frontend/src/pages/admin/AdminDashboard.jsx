@@ -74,26 +74,26 @@ export default function AdminDashboard() {
         
         <div className="bg-brand-surface border border-brand-border rounded-[32px] overflow-hidden shadow-xl flex flex-col md:flex-row min-h-[600px]">
           {/* Sidebar */}
-          <div className="w-full md:w-72 bg-brand-bg/40 border-r border-brand-border p-6 flex flex-col gap-2">
-            <p className="text-[10px] font-bold text-brand-muted uppercase tracking-[2px] mb-4 ml-2">Main Menu</p>
+          <div className="w-full md:w-72 bg-brand-bg/40 border-b md:border-b-0 md:border-r border-brand-border p-4 md:p-6 flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-x-visible scrollbar-none">
+            <p className="hidden md:block text-[10px] font-bold text-brand-muted uppercase tracking-[2px] mb-4 ml-2">Main Menu</p>
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-3 px-5 py-4 rounded-2xl text-sm transition-all group ${
+                className={`flex items-center gap-2 md:gap-3 px-4 md:px-5 py-2.5 md:py-4 rounded-xl md:rounded-2xl text-xs md:text-sm transition-all group shrink-0 whitespace-nowrap ${
                   activeTab === tab.id
                     ? 'bg-gradient-to-r from-accent to-accent-h text-white font-bold shadow-lg shadow-accent/20'
                     : 'text-brand-gray hover:bg-brand-bg hover:text-accent'
                 }`}
               >
-                <tab.icon className={activeTab === tab.id ? 'text-white' : 'text-brand-muted group-hover:text-accent'} size={18} />
+                <tab.icon className={activeTab === tab.id ? 'text-white' : 'text-brand-muted group-hover:text-accent'} size={16} />
                 {tab.label}
               </button>
             ))}
           </div>
 
           {/* Content Area */}
-          <div className="flex-1 p-8 md:p-12 bg-transparent overflow-y-auto">
+          <div className="flex-1 p-4 sm:p-8 md:p-12 bg-transparent overflow-y-auto">
             <motion.div
               key={activeTab}
               initial={{ opacity: 0, x: 20 }}

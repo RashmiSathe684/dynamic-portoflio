@@ -58,7 +58,7 @@ export default function AchievementsSection({ onPreview }) {
       <div className="eyebrow block text-[11px] font-bold uppercase tracking-[2.5px] text-accent mb-2">
         Achievements
       </div>
-      <h2 className="sec-title font-[Space Grotesk] text-[clamp(26px,3vw,40px)] font-bold tracking-[-1px] text-text-main mb-10">
+      <h2 className="sec-title font-display text-[clamp(26px,3vw,40px)] font-bold tracking-[-1px] text-text-main mb-10">
         Milestones &amp; Recognitions
       </h2>
 
@@ -85,7 +85,7 @@ export default function AchievementsSection({ onPreview }) {
                 {/* Title & Description Details */}
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <h3 className="ach-title font-[Space Grotesk] text-[15px] font-bold text-text-main truncate">
+                    <h3 className="ach-title font-display text-[15px] font-bold text-text-main truncate">
                       {ach.title}
                     </h3>
                     <span className="ach-yr text-[10px] font-bold px-2 py-0.5 bg-accent/12 text-accent rounded-md border border-brand-border/60 select-none">

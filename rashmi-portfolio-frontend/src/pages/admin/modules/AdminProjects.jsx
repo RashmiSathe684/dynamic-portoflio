@@ -123,8 +123,8 @@ export default function AdminProjects() {
 
       {/* Form */}
       {showForm && (
-        <form ref={formRef} onSubmit={handleSubmit} className="space-y-8 bg-brand-surface border border-brand-border/60 p-8 rounded-3xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-8 bg-brand-surface border border-brand-border/60 p-4 sm:p-8 rounded-3xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div className="space-y-2">
               <label className="text-sm font-bold text-brand-gray ml-1">Project Title *</label>
               <input
@@ -240,10 +240,64 @@ export default function AdminProjects() {
         </form>
       )}
 
-      {/* Table List */}
+      {/* Table / Card List */}
       <div className="space-y-4">
         <h3 className="text-lg font-bold text-text-main ml-1">Projects List</h3>
-        <div className="overflow-hidden border border-brand-border rounded-[24px] bg-brand-surface">
+        
+        {/* Mobile View: Card List */}
+        <div className="block md:hidden space-y-4">
+          {projects.map((p) => (
+            <div key={p.id} className="p-4 bg-brand-surface border border-brand-border/60 rounded-2xl space-y-3 shadow-sm">
+              <div className="flex justify-between items-start gap-2">
+                <div>
+                  <h4 className="font-bold text-text-main text-sm">{p.title}</h4>
+                  <p className="text-brand-gray text-[11px] mt-1 line-clamp-2">{p.shortDescription}</p>
+                </div>
+                <div className="flex gap-1 shrink-0">
+                  <button
+                    onClick={() => handleEdit(p)}
+                    className="p-2 text-brand-primary hover:bg-brand-primary/10 rounded-lg transition-all"
+                  >
+                    <FaEdit size={14} />
+                  </button>
+                  <button
+                    onClick={() => setDeleteId(p.id)}
+                    className="p-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
+                  >
+                    <FaTrash size={14} />
+                  </button>
+                </div>
+              </div>
+              
+              <div className="flex flex-wrap gap-1">
+                {p.techStack?.split(',')
+                  .map(s => s.trim())
+                  .filter(Boolean)
+                  .map(s => (
+                    <span key={s} className="text-[9px] bg-brand-primary-light text-brand-primary border border-brand-border px-2 py-0.5 rounded-md font-bold">{s}</span>
+                  ))}
+              </div>
+
+              {(p.githubLink || p.liveLink) && (
+                <div className="flex gap-3 pt-2 text-brand-muted text-xs border-t border-brand-border/40">
+                  {p.githubLink && (
+                    <a href={p.githubLink} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:text-brand-primary">
+                      <FaGithub size={12} /> GitHub
+                    </a>
+                  )}
+                  {p.liveLink && (
+                    <a href={p.liveLink} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:text-brand-primary">
+                      <FaLink size={12} /> Live Demo
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop View: Table */}
+        <div className="hidden md:block overflow-hidden border border-brand-border rounded-[24px] bg-brand-surface">
           <table className="w-full text-sm text-left">
             <thead className="text-xs text-brand-muted uppercase bg-brand-bg/60 border-b border-brand-border">
               <tr>

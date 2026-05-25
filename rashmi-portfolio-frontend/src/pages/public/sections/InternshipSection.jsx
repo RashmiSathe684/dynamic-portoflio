@@ -31,7 +31,7 @@ export default function InternshipSection({ onPreview }) {
       <div className="eyebrow block text-[11px] font-bold uppercase tracking-[2.5px] text-accent mb-2">
         Experience
       </div>
-      <h2 className="sec-title font-[Space Grotesk] text-[clamp(26px,3vw,40px)] font-bold tracking-[-1px] text-text-main mb-10">
+      <h2 className="sec-title font-display text-[clamp(26px,3vw,40px)] font-bold tracking-[-1px] text-text-main mb-10">
         Internships &amp; Work Experience
       </h2>
 
@@ -48,7 +48,7 @@ export default function InternshipSection({ onPreview }) {
               {/* Detail Inner Box */}
               <div className="intern-inner">
                 <div className="intern-top flex flex-col sm:flex-row justify-between items-start gap-2.5 mb-1.5 select-none">
-                  <h3 className="intern-title font-[Space Grotesk] text-[18px] font-bold text-text-main leading-snug">
+                  <h3 className="intern-title font-display text-[18px] font-bold text-text-main leading-snug">
                     {intern.title}
                   </h3>
                   <span className="intern-dur text-[12px] font-semibold px-3 py-1 bg-accent/12 text-accent border border-brand-border rounded-[9px] whitespace-nowrap">

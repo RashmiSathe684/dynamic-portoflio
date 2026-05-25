@@ -82,7 +82,7 @@ export default function SkillsSection() {
       <div className="eyebrow block text-[11px] font-bold uppercase tracking-[2.5px] text-accent mb-2 select-none">
         Technical Skills
       </div>
-      <h2 className="sec-title font-[Space Grotesk] text-[clamp(26px,3vw,40px)] font-bold tracking-[-1px] text-text-main mb-2">
+      <h2 className="sec-title font-display text-[clamp(26px,3vw,40px)] font-bold tracking-[-1px] text-text-main mb-2">
         Tech Stack &amp; Expertise
       </h2>
       <p className="sec-sub text-[14px] text-brand-muted mb-6 max-w-[520px] select-none">
@@ -109,7 +109,7 @@ export default function SkillsSection() {
                 >
                   {config.icon}
                 </div>
-                <span className="sk-cat font-[Space Grotesk] text-[13px] font-bold text-text-main uppercase tracking-[0.5px]">
+                <span className="sk-cat font-display text-[13px] font-bold text-text-main uppercase tracking-[0.5px]">
                   {config.label}
                 </span>
               </div>

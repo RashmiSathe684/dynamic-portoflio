@@ -156,8 +156,8 @@ export default function AdminCertifications() {
       </div>
 
       {/* FORM */}
-      <form ref={formRef} onSubmit={handleSubmit} className="space-y-8 bg-brand-surface border border-brand-border/60 p-8 rounded-3xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <form ref={formRef} onSubmit={handleSubmit} className="space-y-8 bg-brand-surface border border-brand-border/60 p-4 sm:p-8 rounded-3xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <div className="space-y-2">
             <label className="text-sm font-bold text-brand-gray ml-1">Title</label>
             <input
@@ -277,7 +277,40 @@ export default function AdminCertifications() {
       {/* LIST */}
       <div className="space-y-4">
         <h3 className="text-lg font-bold text-text-main ml-1">Existing Certifications</h3>
-        <div className="overflow-hidden border border-brand-border rounded-[24px] bg-brand-surface">
+        
+        {/* Mobile View: Card List */}
+        <div className="block md:hidden space-y-4">
+          {items.map((item) => (
+            <div key={item.id} className="p-4 bg-brand-surface border border-brand-border/60 rounded-2xl space-y-2 shadow-sm">
+              <div className="flex justify-between items-start gap-2">
+                <div>
+                  <h4 className="font-bold text-text-main text-sm">{item.title}</h4>
+                  <p className="text-brand-gray text-[11px] mt-1">{item.organization}</p>
+                </div>
+                <div className="flex gap-1 shrink-0">
+                  <button
+                    onClick={() => handleEdit(item)}
+                    className="p-2 text-brand-primary hover:bg-brand-primary/10 rounded-lg transition-all"
+                  >
+                    <FaEdit size={14} />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className="p-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-all"
+                  >
+                    <FaTrash size={14} />
+                  </button>
+                </div>
+              </div>
+              <div className="text-[11px] text-brand-muted font-medium pt-1.5 border-t border-brand-border/40">
+                📅 Issued: {item.issueDate || '—'}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop View: Table */}
+        <div className="hidden md:block overflow-hidden border border-brand-border rounded-[24px] bg-brand-surface">
           <table className="w-full text-sm text-left">
             <thead className="text-xs text-brand-muted uppercase bg-brand-bg/60 border-b border-brand-border">
               <tr>
