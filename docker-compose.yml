@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./portfolio
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - backend-uploads:/app/uploads
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://ep-misty-wind-apl0beuy-pooler.c-7.us-east-1.aws.neon.tech/neondb?user=neondb_owner&password=npg_ijxZRY3rDH8e&sslmode=require&channelBinding=require
+      - SPRING_DATASOURCE_USERNAME=neondb_owner
+      - SPRING_DATASOURCE_PASSWORD=npg_ijxZRY3rDH8e
+      - ALLOWED_ORIGINS=http://localhost,http://localhost:80,http://localhost:5173
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./rashmi-portfolio-frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_BASE_URL=http://localhost:8080
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend-uploads:

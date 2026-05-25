@@ -1,0 +1,25 @@
+# System / IDE files
+.metadata/
+RemoteSystemsTempFiles/
+.project
+.classpath
+.settings/
+.idea/
+*.iml
+*.class
+.vscode/
+
+# Maven build outputs
+/portfolio/target/
+
+# Local media uploads
+/portfolio/uploads/
+
+# Node packages and compiled frontend builds
+/rashmi-portfolio-frontend/node_modules/
+/rashmi-portfolio-frontend/dist/
+/rashmi-portfolio-frontend/.env.local
+/rashmi-portfolio-frontend/.env.*.local
+
+# Logs
+*.log

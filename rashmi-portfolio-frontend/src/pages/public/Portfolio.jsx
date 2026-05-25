@@ -1,0 +1,79 @@
+import { useState, useEffect } from 'react';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
+import HeroSection from './sections/HeroSection';
+import AboutSection from './sections/AboutSection';
+import SkillsSection from './sections/SkillsSection';
+import ProjectsSection from './sections/ProjectsSection';
+import AchievementsSection from './sections/AchievementsSection';
+import CertificationsSection from './sections/CertificationsSection';
+import InternshipSection from './sections/InternshipSection';
+import EducationSection from './sections/EducationSection';
+import ContactSection from './sections/ContactSection';
+
+export default function Portfolio() {
+  const [previewImage, setPreviewImage] = useState(null);
+
+  // Close modal on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setPreviewImage(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-brand-bg relative transition-colors duration-500">
+      {/* Global Background Blobs */}
+      <div className="blob blob-1"></div>
+      <div className="blob blob-2"></div>
+      <div className="blob blob-3"></div>
+
+      <Navbar />
+      <main className="relative z-10">
+        <HeroSection onPreview={setPreviewImage} />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection onPreview={setPreviewImage} />
+        <AchievementsSection onPreview={setPreviewImage} />
+        <CertificationsSection onPreview={setPreviewImage} />
+        <InternshipSection onPreview={setPreviewImage} />
+        <EducationSection />
+        <ContactSection />
+      </main>
+      <div className="w-full h-[1px] bg-brand-border/60 max-w-7xl mx-auto opacity-60"></div>
+      <Footer />
+
+      {/* Global Modal Overlay */}
+      <div 
+        className={`modal-overlay ${previewImage ? 'open' : ''}`}
+        onClick={(e) => {
+          if (e.target.classList.contains('modal-overlay')) {
+            setPreviewImage(null);
+          }
+        }}
+      >
+        <div className="modal-preview">
+          <button 
+            className="modal-close" 
+            onClick={() => setPreviewImage(null)}
+          >
+            ✕
+          </button>
+          {previewImage && (
+            (previewImage.toLowerCase().endsWith('.pdf') || previewImage.toLowerCase().includes('.pdf?')) ? (
+              <iframe 
+                src={previewImage} 
+                className="w-full h-[70vh] rounded-xl border-none mt-2 bg-white" 
+                title="Document Preview"
+              />
+            ) : (
+              <img src={previewImage} alt="Document Preview" />
+            )
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
