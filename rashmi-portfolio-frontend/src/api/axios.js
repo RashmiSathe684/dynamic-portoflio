@@ -11,13 +11,15 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-// Handle 401 – redirect to login
+// Handle 401 – redirect to login only if on admin pages
 API.interceptors.response.use(
   (res) => res,
   (err) => {
     if (err.response?.status === 401) {
       localStorage.removeItem('admin_token');
-      window.location.href = '/admin/login';
+      if (window.location.pathname.startsWith('/admin')) {
+        window.location.href = '/admin/login';
+      }
     }
     return Promise.reject(err);
   }
