@@ -1,22 +1,51 @@
 import { useState, useEffect } from 'react';
 import { getProjects, resolveUrl, sortItemsByDate } from '../../../api/services';
+import { FiSearch, FiGithub, FiExternalLink, FiEye } from 'react-icons/fi';
+
+const fallbackProjects = [
+  {
+    id: 'f1',
+    title: 'Campus Sync - Student Collaboration Portal',
+    shortDescription: 'A full stack collaboration platform enabling campus events organization, student discussion forums, and automated Gmail notifications with JWT authorization.',
+    techStack: 'Spring Boot, Java, React, PostgreSQL, TailwindCSS, REST APIs',
+    createdDate: 'MAY 2026',
+    githubLink: 'https://github.com/RashmiSathe684',
+    liveLink: '',
+    imageUrl: ''
+  },
+  {
+    id: 'f2',
+    title: 'Dynamic Developer Portfolio App',
+    shortDescription: 'A premium, responsive dev portfolio utilizing dynamic settings management from a Spring Boot API, custom HSL theme settings, and Neon PostgreSQL storage.',
+    techStack: 'React, Node, Spring Boot, PostgreSQL, Neon AWS, Framer Motion',
+    createdDate: 'JUN 2026',
+    githubLink: 'https://github.com/RashmiSathe684/dynamic-portoflio',
+    liveLink: '',
+    imageUrl: ''
+  }
+];
+
 export default function ProjectsSection({ onPreview }) {
   const [projects, setProjects] = useState([]);
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch all projects or paginated projects from backend
+    setIsLoading(true);
     getProjects({ page: 0, size: 100 })
       .then((res) => {
-        if (res.data?.content) {
+        if (res.data?.content && res.data.content.length > 0) {
           setProjects(sortItemsByDate(res.data.content, 'createdDate'));
         }
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
-  const dataList = projects;
+  const dataList = projects.length > 0 ? projects : fallbackProjects;
 
   // Filter projects by search query
   const filteredData = dataList.filter((item) => {
@@ -29,16 +58,50 @@ export default function ProjectsSection({ onPreview }) {
   });
 
   // Calculate local client-side pagination
-  const pageSize = 2;
+  const pageSize = 4;
   const totalFilteredPages = Math.ceil(filteredData.length / pageSize) || 1;
   const currentPage = Math.min(page, totalFilteredPages - 1);
   const activePage = currentPage >= 0 ? currentPage : 0;
   const paginatedData = filteredData.slice(activePage * pageSize, (activePage + 1) * pageSize);
 
-  const defaultGradient = 'linear-gradient(135deg, rgba(159,168,255,0.15) 0%, rgba(103,232,249,0.1) 100%)';
+  const ProjectsSkeleton = () => (
+    <div className="proj-grid grid grid-cols-1 md:grid-cols-2 gap-6 select-none">
+      {[1, 2].map((n) => (
+        <div key={n} className="pj border border-brand-border/40 rounded-3xl overflow-hidden bg-brand-surface/60 backdrop-blur-md flex flex-col h-[320px]">
+          {/* Cover image skeleton */}
+          <div className="skeleton w-full h-[140px] opacity-40" />
+          {/* Card body skeleton */}
+          <div className="p-6 flex-1 flex flex-col justify-between">
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <div className="skeleton w-1/3 h-5 rounded-lg opacity-80" />
+                <div className="skeleton w-1/4 h-3.5 rounded-lg opacity-60" />
+              </div>
+              <div className="skeleton w-full h-4 rounded-lg opacity-60" />
+              <div className="skeleton w-5/6 h-4 rounded-lg opacity-60" />
+            </div>
+            <div className="space-y-3 mt-4">
+              <div className="flex gap-2">
+                <div className="skeleton w-12 h-6 rounded-md opacity-75" />
+                <div className="skeleton w-16 h-6 rounded-md opacity-75" />
+                <div className="skeleton w-14 h-6 rounded-md opacity-75" />
+              </div>
+              <div className="flex gap-2.5">
+                <div className="skeleton w-20 h-8 rounded-xl opacity-80" />
+                <div className="skeleton w-24 h-8 rounded-xl opacity-80" />
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 
   return (
-    <section id="projects" className="section alt py-20 px-6 md:px-20 relative z-10 transition-colors duration-500">
+    <section 
+      id="projects" 
+      className="section py-24 px-6 md:px-20 max-w-6xl mx-auto relative z-10 transition-colors duration-500 select-text"
+    >
       <div className="eyebrow block text-[11px] font-bold uppercase tracking-[2.5px] text-accent mb-2">
         Projects
       </div>
@@ -47,8 +110,8 @@ export default function ProjectsSection({ onPreview }) {
       </h2>
 
       {/* Search Input */}
-      <div className="proj-search flex items-center gap-2.5 bg-brand-surface border border-brand-border rounded-xl px-4 py-3 mb-6 select-none">
-        <span style={{ color: 'var(--muted)', fontSize: '16px' }}>🔍</span>
+      <div className="proj-search flex items-center gap-2.5 bg-brand-surface border border-brand-border rounded-xl px-4 py-3 mb-8 select-none">
+        <FiSearch size={16} className="text-brand-muted shrink-0" />
         <input 
           type="text" 
           placeholder="Search projects or tech stack..."
@@ -61,94 +124,102 @@ export default function ProjectsSection({ onPreview }) {
         />
       </div>
 
-      {/* Projects Grid */}
-      <div className="proj-grid grid grid-cols-1 md:grid-cols-2 gap-4">
-        {paginatedData.length === 0 ? (
-          <div className="md:col-span-2 text-center py-12 text-slate-400 font-medium select-none text-sm bg-white/5 border border-brand-border/60 rounded-3xl">
-            No projects added yet. Please check back later!
-          </div>
-        ) : (
-          paginatedData.map((project) => {
-            const photoUrl = resolveUrl(project.imageUrl);
-
-          return (
-            <div key={project.id} className="pj flex flex-col select-text">
-              {/* Cover Image Container (160px height) */}
-              {project.imageUrl && (
-                <div 
-                  className="pj-img h-[160px] flex items-center justify-center relative overflow-hidden select-none"
-                  style={{ background: 'var(--border)' }}
-                >
-                  <img 
-                    src={photoUrl} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover" 
-                  />
-                  <div className="pj-img-label">Preview Image</div>
-                </div>
-              )}
-
-              {/* Body */}
-              <div className="pj-body p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="pj-top flex justify-between items-start gap-2 mb-2">
-                    <h3 className="pj-title font-display text-[16px] font-bold text-text-main leading-[1.2]">
-                      {project.title}
-                    </h3>
-                    <span className="pj-date text-[11px] text-brand-muted uppercase tracking-wider whitespace-nowrap">
-                      {project.createdDate || 'DEC 2025'}
-                    </span>
-                  </div>
-
-                  <p className="pj-desc text-[13px] text-brand-gray leading-[1.65] mb-3.5">
-                    {project.shortDescription}
-                  </p>
-                </div>
-
-                <div>
-                  <div className="pj-tags flex flex-wrap gap-1.5 mb-4 select-none">
-                    {(project.techStack || '').split(',')
-                      .map((tech) => tech.trim())
-                      .filter(Boolean)
-                      .map((tech) => (
-                        <span key={tech} className="pj-tag">
-                          {tech}
-                        </span>
-                      ))}
-                  </div>
-
-                  {/* Actions */}
-                  <div className="pj-actions flex gap-2 select-none">
-                    {project.githubLink && (
-                      <a href={project.githubLink} target="_blank" rel="noreferrer" className="pj-btn">
-                        ⌥ GitHub
-                      </a>
-                    )}
-                    {project.liveLink && (
-                      <a href={project.liveLink} target="_blank" rel="noreferrer" className="pj-btn live">
-                        ↗ Live Demo
-                      </a>
-                    )}
-                    {project.imageUrl && (
-                      <button 
-                        onClick={() => onPreview(photoUrl)}
-                        className="pj-btn prev"
-                      >
-                        🖼 Preview
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
+      {/* Grid or Skeleton Loader */}
+      {isLoading ? (
+        <ProjectsSkeleton />
+      ) : (
+        <div className="proj-grid grid grid-cols-1 md:grid-cols-2 gap-6">
+          {paginatedData.length === 0 ? (
+            <div className="md:col-span-2 text-center py-12 text-slate-400 font-medium select-none text-sm bg-white/5 border border-brand-border/60 rounded-3xl">
+              No projects matched your criteria.
             </div>
-          );
-        })
+          ) : (
+            paginatedData.map((project) => {
+              const photoUrl = project.imageUrl ? resolveUrl(project.imageUrl) : '';
+
+              return (
+                <div key={project.id} className="pj flex flex-col bg-brand-surface border border-brand-border/40 rounded-3xl overflow-hidden shadow-lg select-text h-full min-h-[320px]">
+                  {/* Cover Image Container (140px height) */}
+                  {photoUrl ? (
+                    <div 
+                      className="pj-img h-[140px] flex items-center justify-center relative overflow-hidden select-none bg-brand-bg border-b border-brand-border/40"
+                    >
+                      <img 
+                        src={photoUrl} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                      />
+                      <div className="pj-img-label">Project Preview</div>
+                    </div>
+                  ) : (
+                    // Aesthetic placeholder gradient if no image uploaded
+                    <div className="h-[120px] bg-gradient-to-tr from-accent/10 to-cyan/10 border-b border-brand-border/45 flex items-center justify-center select-none font-display font-semibold text-brand-muted text-[13px] tracking-wide">
+                      Dynamic Project Context
+                    </div>
+                  )}
+
+                  {/* Body */}
+                  <div className="pj-body p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="pj-top flex justify-between items-start gap-2.5 mb-2.5">
+                        <h3 className="pj-title font-display text-[16.5px] font-bold text-text-main leading-[1.2]">
+                          {project.title}
+                        </h3>
+                        <span className="pj-date text-[10px] font-bold text-brand-muted uppercase tracking-wider whitespace-nowrap bg-accent/8 border border-brand-border/50 px-2 py-0.5 rounded-md">
+                          {project.createdDate || 'DEC 2025'}
+                        </span>
+                      </div>
+
+                      <p className="pj-desc text-[13.5px] text-brand-gray leading-[1.65] mb-4">
+                        {project.shortDescription}
+                      </p>
+                    </div>
+
+                    <div>
+                      <div className="pj-tags flex flex-wrap gap-1.5 mb-4.5 select-none">
+                        {(project.techStack || '').split(',')
+                          .map((tech) => tech.trim())
+                          .filter(Boolean)
+                          .map((tech) => (
+                            <span key={tech} className="pj-tag">
+                              {tech}
+                            </span>
+                          ))}
+                      </div>
+
+                      {/* Actions */}
+                      <div className="pj-actions flex gap-2 select-none">
+                        {project.githubLink && (
+                          <a href={project.githubLink} target="_blank" rel="noreferrer" className="pj-btn inline-flex items-center gap-1.5">
+                            <FiGithub size={13} /> GitHub
+                          </a>
+                        )}
+                        {project.liveLink && (
+                          <a href={project.liveLink} target="_blank" rel="noreferrer" className="pj-btn live inline-flex items-center gap-1.5">
+                            <FiExternalLink size={13} /> Live Demo
+                          </a>
+                        )}
+                        {photoUrl && (
+                          <button 
+                            onClick={() => onPreview(photoUrl)}
+                            className="pj-btn prev inline-flex items-center gap-1.5"
+                          >
+                            <FiEye size={13} /> Preview
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
       )}
-      </div>
 
       {/* Pagination Controls */}
-      {totalFilteredPages > 1 && (
-        <div className="pagination flex items-center justify-center gap-2 mt-8 select-none">
+      {!isLoading && totalFilteredPages > 1 && (
+        <div className="pagination flex items-center justify-center gap-2 mt-10 select-none">
           <button 
             onClick={() => setPage((p) => Math.max(0, p - 1))}
             disabled={activePage === 0}

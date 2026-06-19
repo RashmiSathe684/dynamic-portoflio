@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getAchievements, resolveUrl } from '../../../api/services';
+import { FiAward, FiEye } from 'react-icons/fi';
 
 const fallbackAchievements = [
   {
@@ -78,8 +79,8 @@ export default function AchievementsSection({ onPreview }) {
               {/* Left Column: Icon and Text */}
               <div className="flex items-center gap-4 flex-1">
                 {/* Custom Trophy Icon Wrapper */}
-                <div className="w-11 h-11 rounded-[12px] flex items-center justify-center text-[20px] bg-accent/12 text-accent border border-brand-border/60 shrink-0 select-none">
-                  🏆
+                <div className="ach-icon-box w-11 h-11 rounded-[12px] flex items-center justify-center bg-accent/12 text-accent border border-brand-border/60 shrink-0 select-none">
+                  <FiAward size={20} />
                 </div>
                 
                 {/* Title & Description Details */}
@@ -103,9 +104,9 @@ export default function AchievementsSection({ onPreview }) {
                 {urls.length === 1 && (
                   <button 
                     onClick={() => onPreview(resolveUrl(urls[0]))}
-                    className="ach-view-btn-new"
+                    className="ach-view-btn-new inline-flex items-center gap-1.5"
                   >
-                    👁 View Certificate
+                    <FiEye size={13} /> View Certificate
                   </button>
                 )}
                 {urls.length > 1 && (
@@ -114,9 +115,9 @@ export default function AchievementsSection({ onPreview }) {
                       <button 
                         key={idx}
                         onClick={() => onPreview(resolveUrl(url))}
-                        className="ach-view-btn-new"
+                        className="ach-view-btn-new inline-flex items-center gap-1.5"
                       >
-                        👁 View Proof {idx + 1}
+                        <FiEye size={13} /> View Proof {idx + 1}
                       </button>
                     ))}
                   </div>

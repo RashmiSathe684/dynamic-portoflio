@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { sendContactMessage } from '../../../api/services';
+import { FiMail, FiLinkedin, FiGithub, FiSend, FiCheck } from 'react-icons/fi';
+import { SiLeetcode } from 'react-icons/si';
 
 export default function ContactSection() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -49,10 +51,10 @@ export default function ContactSection() {
           <div className="flex flex-col select-none">
             <a href="mailto:rashmisathe684@gmail.com" className="clink">
               <div 
-                className="clink-ico" 
+                className="clink-ico flex items-center justify-center" 
                 style={{ color: '#EF4444', background: 'rgba(239, 68, 68, 0.12)' }}
               >
-                ✉
+                <FiMail size={16} />
               </div>
               <div>
                 <div className="clink-lbl">Email</div>
@@ -62,10 +64,10 @@ export default function ContactSection() {
             
             <a href="https://linkedin.com/in/rashmisathe" target="_blank" rel="noreferrer" className="clink">
               <div 
-                className="clink-ico font-bold text-[15px]" 
+                className="clink-ico flex items-center justify-center" 
                 style={{ color: '#3B82F6', background: 'rgba(59, 130, 246, 0.12)' }}
               >
-                in
+                <FiLinkedin size={16} />
               </div>
               <div>
                 <div className="clink-lbl">LinkedIn</div>
@@ -75,10 +77,10 @@ export default function ContactSection() {
             
             <a href="https://github.com/RashmiSathe684" target="_blank" rel="noreferrer" className="clink">
               <div 
-                className="clink-ico font-semibold text-[19px]" 
+                className="clink-ico flex items-center justify-center" 
                 style={{ color: '#4B5563', background: 'rgba(75, 85, 99, 0.12)' }}
               >
-                ⌥
+                <FiGithub size={16} />
               </div>
               <div>
                 <div className="clink-lbl">GitHub</div>
@@ -88,10 +90,10 @@ export default function ContactSection() {
             
             <a href="https://leetcode.com/u/rashmi684" target="_blank" rel="noreferrer" className="clink">
               <div 
-                className="clink-ico text-[16px]" 
+                className="clink-ico flex items-center justify-center" 
                 style={{ color: '#F59E0B', background: 'rgba(245, 158, 11, 0.12)' }}
               >
-                ◈
+                <SiLeetcode size={15} />
               </div>
               <div>
                 <div className="clink-lbl">LeetCode</div>
@@ -137,13 +139,21 @@ export default function ContactSection() {
             <button 
               type="submit" 
               disabled={loading}
-              className="fbtn cursor-pointer"
+              className="fbtn cursor-pointer inline-flex items-center justify-center gap-2"
             >
               {loading 
                 ? 'Sending...' 
                 : sent 
-                  ? 'Message Sent Successfully! 🗸' 
-                  : 'Send Message ✉'
+                  ? (
+                    <>
+                      Message Sent Successfully! <FiCheck size={14} />
+                    </>
+                  ) 
+                  : (
+                    <>
+                      Send Message <FiSend size={13} />
+                    </>
+                  )
               }
             </button>
           </form>

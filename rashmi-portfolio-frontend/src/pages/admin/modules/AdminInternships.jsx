@@ -293,7 +293,7 @@ export default function AdminInternships() {
             </div>
 
             {/* Desktop View: Table */}
-            <div className="hidden md:block overflow-hidden border border-brand-border rounded-[24px] bg-brand-surface">
+            <div className="hidden md:block overflow-x-auto border border-brand-border rounded-[24px] bg-brand-surface">
               <table className="w-full text-sm text-left">
                 <thead className="text-xs text-brand-muted uppercase bg-brand-bg/60 border-b border-brand-border">
                   <tr>

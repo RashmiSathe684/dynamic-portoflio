@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getInternships, resolveUrl, sortItemsByDate } from '../../../api/services';
+import { FiCalendar, FiExternalLink, FiEye } from 'react-icons/fi';
 
 const fallbackInternship = [
   {
@@ -51,8 +52,8 @@ export default function InternshipSection({ onPreview }) {
                   <h3 className="intern-title font-display text-[18px] font-bold text-text-main leading-snug">
                     {intern.title}
                   </h3>
-                  <span className="intern-dur text-[12px] font-semibold px-3 py-1 bg-accent/12 text-accent border border-brand-border rounded-[9px] whitespace-nowrap">
-                    📅 {intern.duration}
+                  <span className="intern-dur text-[12px] font-semibold px-3 py-1 bg-accent/12 text-accent border border-brand-border rounded-[9px] whitespace-nowrap inline-flex items-center gap-1.5">
+                    <FiCalendar size={13} /> {intern.duration}
                   </span>
                 </div>
 
@@ -76,18 +77,18 @@ export default function InternshipSection({ onPreview }) {
                         href={intern.certificateUrl} 
                         target="_blank" 
                         rel="noreferrer"
-                        className="cbtn cbtn-a"
+                        className="cbtn cbtn-a inline-flex items-center gap-1"
                       >
-                        ↗ View Certificate
+                        <FiExternalLink size={11} /> View Certificate
                       </a>
                     )}
 
                     {intern.downloadUrl && (
                       <button 
                         onClick={() => onPreview(docUrl)}
-                        className="cbtn cbtn-v"
+                        className="cbtn cbtn-v inline-flex items-center gap-1"
                       >
-                        👁 View Document
+                        <FiEye size={11} /> View Document
                       </button>
                     )}
                   </div>

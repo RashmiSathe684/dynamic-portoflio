@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FiSun, FiMoon, FiLock } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 const links = [
   'Home',
@@ -37,7 +39,14 @@ export default function Navbar() {
     const sectionId = id.toLowerCase();
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Offset for sticky navbar height (62px)
+      const navbarHeight = 62;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - navbarHeight;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
     setMenuOpen(false);
   };
@@ -53,12 +62,12 @@ export default function Navbar() {
       </div>
 
       {/* Desktop Links */}
-      <div className="hidden lg:flex items-center gap-[30px]">
+      <div className="hidden lg:flex items-center gap-[24px]">
         {links.map((link) => (
           <button
             key={link}
             onClick={() => scrollTo(link)}
-            className="text-[13px] font-medium text-brand-gray hover:text-accent transition-colors duration-200"
+            className="text-[14.5px] font-semibold text-brand-gray hover:text-accent transition-colors duration-200"
           >
             {link}
           </button>
@@ -73,9 +82,17 @@ export default function Navbar() {
           id="theme-btn" 
           title="Toggle theme"
         >
-          {darkMode ? '☀' : '🌙'}
+          {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
         </button>
 
+        {/* Admin Login Button (Secure Lock Icon) */}
+        <Link 
+          to="/admin/login" 
+          className="theme-toggle" 
+          title="Admin Portal Login"
+        >
+          <FiLock size={15} />
+        </Link>
 
         {/* Mobile menu trigger */}
         <button
@@ -105,7 +122,7 @@ export default function Navbar() {
                 <button
                   key={link}
                   onClick={() => scrollTo(link)}
-                  className="w-full text-left px-4 py-3 text-[14px] text-brand-gray hover:text-accent font-medium rounded-xl hover:bg-accent/5 transition-all"
+                  className="w-full text-left px-4 py-3 text-[16px] text-brand-gray hover:text-accent font-semibold rounded-xl hover:bg-accent/5 transition-all"
                 >
                   {link}
                 </button>

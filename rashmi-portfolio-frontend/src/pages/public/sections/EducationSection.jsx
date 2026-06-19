@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getEducation } from '../../../api/services';
+import { FiBook, FiBookOpen, FiAward } from 'react-icons/fi';
 
 const fallbackEducation = [
   { 
@@ -28,16 +29,16 @@ const fallbackEducation = [
   }
 ];
 
-const getEduEmoji = (type) => {
+const getEduIcon = (type) => {
   switch (type ? type.toUpperCase() : 'DEFAULT') {
     case 'GRAD':
-      return '🎓';
+      return <FiAward size={16} />;
     case 'BOOK':
-      return '📖';
+      return <FiBook size={16} />;
     case 'SCHOOL':
-      return '🏫';
+      return <FiBookOpen size={16} />;
     default:
-      return '🎓';
+      return <FiAward size={16} />;
   }
 };
 
@@ -95,35 +96,40 @@ export default function EducationSection() {
       {/* Wrapped in a single beautiful glass card */}
       <div className="glass-card flex flex-col gap-0 select-text">
         {dataList.map((edu, i) => {
-          const emoji = getEduEmoji(edu.iconType);
+          const icon = getEduIcon(edu.iconType);
           const iconStyle = getEduIconStyle(edu.iconType);
+          const scoreStr = edu.score || '';
+          const displayScore = scoreStr ? (scoreStr.includes('%') || scoreStr.toLowerCase().includes('cgpa') ? scoreStr : `${scoreStr} CGPA`) : '';
 
           return (
             <div key={edu.id || i} className="edu-row">
               {/* Distinct colored icon avatar */}
               <div 
-                className="edu-ico select-none"
+                className="edu-ico select-none flex items-center justify-center"
                 style={iconStyle}
               >
-                {emoji}
+                {icon}
               </div>
 
               {/* Title & Organization info */}
-              <div>
-                <h3 className="edu-deg font-display text-[15px] font-bold text-text-main">
+              <div className="flex-1 min-w-0">
+                <h3 className="edu-deg font-display text-[15px] font-bold text-text-main truncate">
                   {edu.degree}
                 </h3>
-                <div className="edu-col text-[13px] text-brand-muted mt-0.5">
+                <div className="edu-col text-[13px] text-brand-muted mt-0.5 truncate">
                   {edu.institution}
                 </div>
               </div>
 
               {/* Score & Duration */}
-              <div className="select-none">
-                <div className="edu-score font-display text-[22px] font-bold text-accent text-right">
-                  {edu.score}
-                </div>
-                <div className="edu-yr text-[12px] text-brand-muted text-right mt-1 whitespace-nowrap">
+              <div className="select-none flex flex-col items-end gap-1.5 shrink-0">
+                {displayScore && (
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-accent/8 border border-brand-border/60 text-accent tracking-wide whitespace-nowrap">
+                    <span className="w-1.5 h-1.5 bg-accent rounded-full animate-[pulse_2s_infinite]"></span>
+                    {displayScore}
+                  </div>
+                )}
+                <div className="edu-yr text-[11.5px] text-brand-muted text-right whitespace-nowrap">
                   {edu.duration}
                 </div>
               </div>

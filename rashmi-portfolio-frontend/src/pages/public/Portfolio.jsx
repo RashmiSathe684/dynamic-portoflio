@@ -31,17 +31,35 @@ export default function Portfolio() {
       <div className="blob blob-3"></div>
 
       <Navbar />
-      <main className="relative z-10">
+      
+      <main className="relative z-10 max-w-7xl mx-auto">
         <HeroSection onPreview={setPreviewImage} />
+        <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
+        
         <AboutSection />
+        <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
+        
         <SkillsSection />
+        <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
+        
         <ProjectsSection onPreview={setPreviewImage} />
+        <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
+        
         <AchievementsSection onPreview={setPreviewImage} />
+        <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
+        
         <CertificationsSection onPreview={setPreviewImage} />
+        <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
+        
         <InternshipSection onPreview={setPreviewImage} />
+        <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
+        
         <EducationSection />
+        <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
+        
         <ContactSection />
       </main>
+
       <div className="w-full h-[1px] bg-brand-border/60 max-w-7xl mx-auto opacity-60"></div>
       <Footer />
 

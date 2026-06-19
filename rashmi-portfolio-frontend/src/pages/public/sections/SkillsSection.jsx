@@ -1,45 +1,46 @@
 import { useState, useEffect } from 'react';
 import { getSkills } from '../../../api/services';
+import { FiCode, FiLayout, FiCpu, FiDatabase, FiTool, FiBookOpen } from 'react-icons/fi';
 
 const categoryConfig = {
   LANGUAGES: { 
     label: 'Languages', 
-    icon: '⌨', 
+    icon: <FiCode size={16} />, 
     bg: 'var(--pill-bg-indigo)', 
     pillClass: '',
     borderColor: 'var(--pill-tx-indigo)'
   },
   FRONTEND: { 
     label: 'Frontend', 
-    icon: '🌐', 
+    icon: <FiLayout size={16} />, 
     bg: 'var(--pill-bg-cyan)', 
     pillClass: 'g',
     borderColor: 'var(--pill-tx-cyan)'
   },
   BACKEND: { 
     label: 'Backend', 
-    icon: '⚙', 
+    icon: <FiCpu size={16} />, 
     bg: 'var(--pill-bg-orange)', 
     pillClass: 'o',
     borderColor: 'var(--pill-tx-orange)'
   },
   DATABASES: { 
     label: 'Databases', 
-    icon: '🗃', 
+    icon: <FiDatabase size={16} />, 
     bg: 'var(--pill-bg-blue)', 
     pillClass: 'b',
     borderColor: 'var(--pill-tx-blue)'
   },
   TOOLS: { 
     label: 'Tools & Development', 
-    icon: '🛠', 
+    icon: <FiTool size={16} />, 
     bg: 'var(--pill-bg-pink)', 
     pillClass: 'p',
     borderColor: 'var(--pill-tx-pink)'
   },
   CORE: { 
     label: 'Core Concepts', 
-    icon: '🧠', 
+    icon: <FiBookOpen size={16} />, 
     bg: 'var(--pill-bg-slate)', 
     pillClass: 's',
     borderColor: 'var(--pill-tx-slate)'
@@ -49,10 +50,10 @@ const categoryConfig = {
 const fallbackData = {
   LANGUAGES: ['Java', 'Python', 'C', 'SQL'],
   FRONTEND: ['HTML', 'CSS', 'JavaScript', 'React JS'],
-  BACKEND: ['J2EE', 'Spring Boot', 'REST APIs', 'Hibernate', 'JPA', 'JDBC', 'Microservices'],
+  BACKEND: ['J2EE', 'Spring Boot', 'REST APIs', 'Hibernate', 'JPA', 'JDBC'],
   DATABASES: ['PostgreSQL', 'MySQL', 'Oracle', 'Firebase'],
-  TOOLS: ['Git & GitHub', 'Postman', 'Maven', 'VS Code', 'Eclipse IDE', 'Cloud'],
-  CORE: ['DSA', 'OOPs', 'DBMS', 'OS', 'CN', 'System Design']
+  TOOLS: ['Git & GitHub', 'Postman', 'Maven', 'VS Code', 'Eclipse IDE'],
+  CORE: ['DSA', 'OOPs', 'DBMS', 'OS', 'CN']
 };
 
 export default function SkillsSection() {
@@ -69,9 +70,14 @@ export default function SkillsSection() {
   }, []);
 
   const groupedSkills = skills.reduce((acc, skill) => {
+    const name = skill.name ? skill.name.trim() : '';
+    const nameLower = name.toLowerCase();
+    if (nameLower === 'microservices' || nameLower === 'cloud' || nameLower === 'system design') {
+      return acc;
+    }
     const cat = skill.category ? skill.category.toUpperCase() : 'CORE';
     if (!acc[cat]) acc[cat] = [];
-    acc[cat].push(skill.name);
+    acc[cat].push(name);
     return acc;
   }, {});
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getCertifications, resolveUrl } from '../../../api/services';
+import { FiCloud, FiAward, FiBookOpen, FiCpu, FiBriefcase, FiFileText, FiEye, FiExternalLink } from 'react-icons/fi';
 
 const fallbackCerts = [
   {
@@ -47,17 +48,17 @@ const fallbackCerts = [
 const getCertMeta = (orgName) => {
   const o = orgName.toLowerCase();
   if (o.includes('amazon') || o.includes('aws')) {
-    return { icon: '☁️', bg: 'rgba(253,186,116,0.15)', color: 'var(--peach)', border: '1px solid rgba(253,186,116,0.3)' };
+    return { icon: <FiCloud size={16} />, bg: 'rgba(253,186,116,0.15)', color: 'var(--peach)', border: '1px solid rgba(253,186,116,0.3)' };
   } else if (o.includes('nptel') || o.includes('swayam')) {
-    return { icon: '🎓', bg: 'rgba(167,139,250,0.12)', color: 'var(--accent)', border: '1px solid rgba(167,139,250,0.25)' };
+    return { icon: <FiAward size={16} />, bg: 'rgba(167,139,250,0.12)', color: 'var(--accent)', border: '1px solid rgba(167,139,250,0.25)' };
   } else if (o.includes('infosys')) {
-    return { icon: '💻', bg: 'rgba(103,232,249,0.12)', color: 'var(--cyan)', border: '1px solid rgba(103,232,249,0.3)' };
+    return { icon: <FiBookOpen size={16} />, bg: 'rgba(103,232,249,0.12)', color: 'var(--cyan)', border: '1px solid rgba(103,232,249,0.3)' };
   } else if (o.includes('nxtwave')) {
-    return { icon: '🤖', bg: 'rgba(249,168,212,0.12)', color: 'var(--pink)', border: '1px solid rgba(249,168,212,0.3)' };
+    return { icon: <FiCpu size={16} />, bg: 'rgba(249,168,212,0.12)', color: 'var(--pink)', border: '1px solid rgba(249,168,212,0.3)' };
   } else if (o.includes('linkedin')) {
-    return { icon: '💼', bg: 'rgba(96,165,250,0.12)', color: '#60A5FA', border: '1px solid rgba(96,165,250,0.25)' };
+    return { icon: <FiBriefcase size={16} />, bg: 'rgba(96,165,250,0.12)', color: '#60A5FA', border: '1px solid rgba(96,165,250,0.25)' };
   }
-  return { icon: '📜', bg: 'rgba(148,163,184,0.1)', color: 'var(--muted)', border: '1px solid rgba(148,163,184,0.25)' };
+  return { icon: <FiFileText size={16} />, bg: 'rgba(148,163,184,0.1)', color: 'var(--muted)', border: '1px solid rgba(148,163,184,0.25)' };
 };
 
 export default function CertificationsSection({ onPreview }) {
@@ -97,7 +98,11 @@ export default function CertificationsSection({ onPreview }) {
           const photoUrl = resolveUrl(cert.imageUrl);
 
           return (
-            <div key={cert.id} className="cert-item">
+            <div 
+              key={cert.id} 
+              className="cert-item"
+              style={{ borderLeft: `4px solid ${meta.color}` }}
+            >
               {/* Organization avatar symbol */}
               <div 
                 className="cert-ico select-none flex items-center justify-center text-[18px]"
@@ -126,17 +131,17 @@ export default function CertificationsSection({ onPreview }) {
                     href={cert.certificateLink} 
                     target="_blank" 
                     rel="noreferrer"
-                    className="cbtn cbtn-a"
+                    className="cbtn cbtn-a inline-flex items-center gap-1"
                   >
-                    ↗ Open
+                    <FiExternalLink size={11} /> Open
                   </a>
                 )}
                 {cert.imageUrl && (
                   <button 
                     onClick={() => onPreview(photoUrl)}
-                    className="cbtn cbtn-v"
+                    className="cbtn cbtn-v inline-flex items-center gap-1"
                   >
-                    👁 View
+                    <FiEye size={11} /> View
                   </button>
                 )}
               </div>

@@ -7,7 +7,7 @@ import AdminCertifications from './modules/AdminCertifications';
 import AdminInternships from './modules/AdminInternships';
 import AdminProfile from './modules/AdminProfile';
 import AdminMessages from './modules/AdminMessages';
-import { FiGrid, FiAward, FiFileText, FiLogOut, FiBriefcase, FiUser, FiMail } from 'react-icons/fi';
+import { FiGrid, FiAward, FiFileText, FiLogOut, FiBriefcase, FiUser, FiMail, FiSun, FiMoon } from 'react-icons/fi';
 
 const tabs = [
   { id: 'projects', label: 'Projects', icon: FiGrid },
@@ -61,7 +61,7 @@ export default function AdminDashboard() {
               onClick={() => setDarkMode(!darkMode)}
               title="Toggle theme"
             >
-              {darkMode ? '☀' : '🌙'}
+              {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
             </button>
             <button
               onClick={handleLogout}
@@ -74,7 +74,7 @@ export default function AdminDashboard() {
         
         <div className="bg-brand-surface border border-brand-border rounded-[32px] overflow-hidden shadow-xl flex flex-col md:flex-row min-h-[600px]">
           {/* Sidebar */}
-          <div className="w-full md:w-72 bg-brand-bg/40 border-b md:border-b-0 md:border-r border-brand-border p-4 md:p-6 flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-x-visible scrollbar-none">
+          <div className="w-full md:w-72 bg-brand-bg/40 border-b md:border-b-0 md:border-r border-brand-border p-4 md:p-6 flex flex-row md:flex-col gap-2 overflow-x-auto md:max-h-[calc(100vh-12rem)] md:overflow-y-auto scrollbar-none">
             <p className="hidden md:block text-[10px] font-bold text-brand-muted uppercase tracking-[2px] mb-4 ml-2">Main Menu</p>
             {tabs.map((tab) => (
               <button

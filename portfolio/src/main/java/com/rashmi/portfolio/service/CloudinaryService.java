@@ -16,6 +16,19 @@ public class CloudinaryService {
     private final Cloudinary cloudinary;
 
     public String uploadImage(MultipartFile file, String folder) throws IOException {
+        String originalFilename = file.getOriginalFilename();
+        if (originalFilename != null && originalFilename.toLowerCase().endsWith(".pdf")) {
+            java.nio.file.Path uploadPath = java.nio.file.Paths.get("uploads");
+            if (!java.nio.file.Files.exists(uploadPath)) {
+                java.nio.file.Files.createDirectories(uploadPath);
+            }
+            String cleanedName = originalFilename.replaceAll("\\s+", "_");
+            String fileName = java.util.UUID.randomUUID().toString() + "_" + cleanedName;
+            java.nio.file.Path filePath = uploadPath.resolve(fileName);
+            java.nio.file.Files.copy(file.getInputStream(), filePath);
+            return fileName;
+        }
+
         Map uploadResult = cloudinary.uploader().upload(
             file.getBytes(),
             ObjectUtils.asMap(
@@ -27,6 +40,18 @@ public class CloudinaryService {
     }
 
     public void deleteImage(String imageUrl) {
+        if (imageUrl == null || imageUrl.isEmpty()) {
+            return;
+        }
+        if (!imageUrl.startsWith("http://") && !imageUrl.startsWith("https://")) {
+            try {
+                java.nio.file.Path filePath = java.nio.file.Paths.get("uploads").resolve(imageUrl);
+                java.nio.file.Files.deleteIfExists(filePath);
+            } catch (IOException e) {
+                System.err.println("Failed to delete local file: " + e.getMessage());
+            }
+            return;
+        }
         try {
             // Extract public_id from URL
             String[] parts = imageUrl.split("/");

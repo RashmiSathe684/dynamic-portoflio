@@ -8,6 +8,7 @@ import {
 } from '../../../api/services';
 
 import { FaTimes, FaPlus, FaTrash, FaEdit } from 'react-icons/fa';
+import { FiCalendar } from 'react-icons/fi';
 import CustomAlert from '../../../components/CustomAlert';
 
 export default function AdminCertifications() {
@@ -302,15 +303,15 @@ export default function AdminCertifications() {
                   </button>
                 </div>
               </div>
-              <div className="text-[11px] text-brand-muted font-medium pt-1.5 border-t border-brand-border/40">
-                📅 Issued: {item.issueDate || '—'}
+              <div className="text-[11px] text-brand-muted font-medium pt-1.5 border-t border-brand-border/40 inline-flex items-center gap-1">
+                <FiCalendar size={12} /> Issued: {item.issueDate || '—'}
               </div>
             </div>
           ))}
         </div>
 
         {/* Desktop View: Table */}
-        <div className="hidden md:block overflow-hidden border border-brand-border rounded-[24px] bg-brand-surface">
+        <div className="hidden md:block overflow-x-auto border border-brand-border rounded-[24px] bg-brand-surface">
           <table className="w-full text-sm text-left">
             <thead className="text-xs text-brand-muted uppercase bg-brand-bg/60 border-b border-brand-border">
               <tr>
