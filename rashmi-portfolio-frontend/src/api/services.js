@@ -166,3 +166,7 @@ export const uploadFile = (file) => {
     headers: { 'Content-Type': 'multipart/form-data' }
   });
 };
+
+// PUBLIC PORTFOLIO CONSOLIDATED DATA
+export const getPortfolioDetails = () => API.get('/api/public/portfolio');
+

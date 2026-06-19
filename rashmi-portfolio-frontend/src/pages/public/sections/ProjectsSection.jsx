@@ -25,25 +25,30 @@ const fallbackProjects = [
   }
 ];
 
-export default function ProjectsSection({ onPreview }) {
+export default function ProjectsSection({ projects: initialProjects, onPreview }) {
   const [projects, setProjects] = useState([]);
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
-    getProjects({ page: 0, size: 100 })
-      .then((res) => {
-        if (res.data?.content && res.data.content.length > 0) {
-          setProjects(sortItemsByDate(res.data.content, 'createdDate'));
-        }
-      })
-      .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+    if (initialProjects) {
+      setProjects(sortItemsByDate(initialProjects, 'createdDate'));
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+      getProjects({ page: 0, size: 100 })
+        .then((res) => {
+          if (res.data?.content && res.data.content.length > 0) {
+            setProjects(sortItemsByDate(res.data.content, 'createdDate'));
+          }
+        })
+        .catch(console.error)
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [initialProjects]);
 
   const dataList = projects.length > 0 ? projects : fallbackProjects;
 

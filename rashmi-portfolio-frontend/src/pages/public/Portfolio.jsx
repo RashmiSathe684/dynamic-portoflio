@@ -10,9 +10,25 @@ import CertificationsSection from './sections/CertificationsSection';
 import InternshipSection from './sections/InternshipSection';
 import EducationSection from './sections/EducationSection';
 import ContactSection from './sections/ContactSection';
+import { getPortfolioDetails } from '../../api/services';
 
 export default function Portfolio() {
   const [previewImage, setPreviewImage] = useState(null);
+  const [portfolioData, setPortfolioData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getPortfolioDetails()
+      .then((res) => {
+        if (res.data) setPortfolioData(res.data);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch portfolio details:", err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
 
   // Close modal on Escape key press
   useEffect(() => {
@@ -33,28 +49,28 @@ export default function Portfolio() {
       <Navbar />
       
       <main className="relative z-10 max-w-7xl mx-auto">
-        <HeroSection onPreview={setPreviewImage} />
+        <HeroSection profile={portfolioData?.profile} onPreview={setPreviewImage} />
         <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
         
         <AboutSection />
         <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
         
-        <SkillsSection />
+        <SkillsSection skills={portfolioData?.skills} />
         <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
         
-        <ProjectsSection onPreview={setPreviewImage} />
+        <ProjectsSection projects={portfolioData?.projects} onPreview={setPreviewImage} />
         <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
         
-        <AchievementsSection onPreview={setPreviewImage} />
+        <AchievementsSection achievements={portfolioData?.achievements} onPreview={setPreviewImage} />
         <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
         
-        <CertificationsSection onPreview={setPreviewImage} />
+        <CertificationsSection certifications={portfolioData?.certifications} onPreview={setPreviewImage} />
         <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
         
-        <InternshipSection onPreview={setPreviewImage} />
+        <InternshipSection internships={portfolioData?.internships} onPreview={setPreviewImage} />
         <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
         
-        <EducationSection />
+        <EducationSection education={portfolioData?.education} />
         <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
         
         <ContactSection />

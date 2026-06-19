@@ -61,20 +61,24 @@ const getCertMeta = (orgName) => {
   return { icon: <FiFileText size={16} />, bg: 'rgba(148,163,184,0.1)', color: 'var(--muted)', border: '1px solid rgba(148,163,184,0.25)' };
 };
 
-export default function CertificationsSection({ onPreview }) {
+export default function CertificationsSection({ certifications: initialCerts, onPreview }) {
   const [certs, setCerts] = useState([]);
   const [page, setPage] = useState(0);
 
   useEffect(() => {
-    // Fetch certs from Spring Boot backend (page size 100 for client search and filter)
-    getCertifications({ page: 0, size: 100 })
-      .then((res) => {
-        if (res.data?.content) {
-          setCerts(res.data.content);
-        }
-      })
-      .catch(console.error);
-  }, []);
+    if (initialCerts) {
+      setCerts(initialCerts);
+    } else {
+      // Fetch certs from Spring Boot backend (page size 100 for client search and filter)
+      getCertifications({ page: 0, size: 100 })
+        .then((res) => {
+          if (res.data?.content) {
+            setCerts(res.data.content);
+          }
+        })
+        .catch(console.error);
+    }
+  }, [initialCerts]);
 
   const dataList = certs.length > 0 ? certs : fallbackCerts;
   const pageSize = 5;

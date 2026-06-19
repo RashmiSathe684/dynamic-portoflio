@@ -14,16 +14,20 @@ const fallbackInternship = [
   }
 ];
 
-export default function InternshipSection({ onPreview }) {
+export default function InternshipSection({ internships: initialInternships, onPreview }) {
   const [internships, setInternships] = useState([]);
 
   useEffect(() => {
-    getInternships()
-      .then((res) => {
-        if (res.data) setInternships(sortItemsByDate(res.data, 'duration'));
-      })
-      .catch(console.error);
-  }, []);
+    if (initialInternships) {
+      setInternships(sortItemsByDate(initialInternships, 'duration'));
+    } else {
+      getInternships()
+        .then((res) => {
+          if (res.data) setInternships(sortItemsByDate(res.data, 'duration'));
+        })
+        .catch(console.error);
+    }
+  }, [initialInternships]);
 
   const dataList = internships.length > 0 ? internships : fallbackInternship;
 

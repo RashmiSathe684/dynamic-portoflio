@@ -2,17 +2,21 @@ import { useState, useEffect } from 'react';
 import { getProfileSettings, resolveUrl } from '../../../api/services';
 import { FiUser, FiSearch, FiEye, FiGithub, FiLinkedin } from 'react-icons/fi';
 
-export default function HeroSection({ onPreview }) {
+export default function HeroSection({ profile: initialProfile, onPreview }) {
   const [profile, setProfile] = useState({ resumeUrl: '', profilePhotoUrl: '' });
   const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
-    getProfileSettings()
-      .then((res) => {
-        if (res.data) setProfile(res.data);
-      })
-      .catch(console.error);
-  }, []);
+    if (initialProfile) {
+      setProfile(initialProfile);
+    } else {
+      getProfileSettings()
+        .then((res) => {
+          if (res.data) setProfile(res.data);
+        })
+        .catch(console.error);
+    }
+  }, [initialProfile]);
 
   useEffect(() => {
     setImageError(false);

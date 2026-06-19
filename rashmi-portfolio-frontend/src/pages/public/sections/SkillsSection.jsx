@@ -56,18 +56,22 @@ const fallbackData = {
   CORE: ['DSA', 'OOPs', 'DBMS', 'OS', 'CN']
 };
 
-export default function SkillsSection() {
+export default function SkillsSection({ skills: initialSkills }) {
   const [skills, setSkills] = useState([]);
 
   useEffect(() => {
-    getSkills()
-      .then((res) => {
-        if (res.data && res.data.length > 0) {
-          setSkills(res.data);
-        }
-      })
-      .catch(console.error);
-  }, []);
+    if (initialSkills) {
+      setSkills(initialSkills);
+    } else {
+      getSkills()
+        .then((res) => {
+          if (res.data && res.data.length > 0) {
+            setSkills(res.data);
+          }
+        })
+        .catch(console.error);
+    }
+  }, [initialSkills]);
 
   const groupedSkills = skills.reduce((acc, skill) => {
     const name = skill.name ? skill.name.trim() : '';

@@ -71,16 +71,20 @@ const getEduIconStyle = (type) => {
   }
 };
 
-export default function EducationSection() {
+export default function EducationSection({ education: initialEducation }) {
   const [education, setEducation] = useState([]);
 
   useEffect(() => {
-    getEducation()
-      .then((res) => {
-        if (res.data) setEducation(res.data);
-      })
-      .catch(console.error);
-  }, []);
+    if (initialEducation) {
+      setEducation(initialEducation);
+    } else {
+      getEducation()
+        .then((res) => {
+          if (res.data) setEducation(res.data);
+        })
+        .catch(console.error);
+    }
+  }, [initialEducation]);
 
   const dataList = education.length > 0 ? education : fallbackEducation;
 

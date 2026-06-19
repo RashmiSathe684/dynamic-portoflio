@@ -33,19 +33,23 @@ const fallbackAchievements = [
   }
 ];
 
-export default function AchievementsSection({ onPreview }) {
+export default function AchievementsSection({ achievements: initialAchievements, onPreview }) {
   const [achievements, setAchievements] = useState([]);
   const [page, setPage] = useState(0);
 
   useEffect(() => {
-    getAchievements({ page: 0, size: 100 })
-      .then((res) => {
-        if (res.data?.content) {
-          setAchievements(res.data.content);
-        }
-      })
-      .catch(console.error);
-  }, []);
+    if (initialAchievements) {
+      setAchievements(initialAchievements);
+    } else {
+      getAchievements({ page: 0, size: 100 })
+        .then((res) => {
+          if (res.data?.content) {
+            setAchievements(res.data.content);
+          }
+        })
+        .catch(console.error);
+    }
+  }, [initialAchievements]);
 
   const dataList = achievements.length > 0 ? achievements : fallbackAchievements;
   const pageSize = 4;
