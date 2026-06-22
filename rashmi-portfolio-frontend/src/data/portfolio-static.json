@@ -1,0 +1,226 @@
+{
+  "profile": {
+    "id": "1",
+    "profilePhotoUrl": "https://res.cloudinary.com/dsjkv1i54/image/upload/v1779725943/portfolio/profile/ib2ixxigllfqt7yrdwny.jpg",
+    "resumeUrl": "41fef0f7-5dea-44c7-a67a-c9debe13840e_Rashmi_Sathe_Resume_Jun_2026.pdf",
+    "updatedAt": "2026-06-20T09:41:18.412Z"
+  },
+  "skills": [],
+  "projects": [
+    {
+      "id": "5",
+      "createdAt": "2026-06-12T03:51:32.236Z",
+      "createdDate": "Jun 2026 - Present",
+      "detailedDescription": "Campus Sync is a web-based campus management platform built to streamline administrative and academic operations through role-specific portals.\n\nAdmins can manage users, enrolled students, and academic subjects. Faculty members can log daily attendance and query attendance history filtered by Faculty, Subject, and Date.\n\nAuthentication uses stateless JWT — the React frontend stores the token in local storage and an Axios interceptor automatically appends it as a Bearer token to every API call. The Spring Boot backend validates each request through a JwtRequestFilter chain, authorizing access based on user roles.\n\nDatabase entities are managed through Spring Data JPA (Hibernate) on MySQL, with no raw SQL needed for standard operations. The UI is built with React 19, Vite 7, and Tailwind CSS v4 for a fast, responsive dashboard experience.\n\nBuilt as the live training project at Kiran Academy, Pune — part of a 6-month integrated placement-linked full stack Java program.",
+      "githubLink": "https://github.com/RashmiSathe684/Campus-Sync",
+      "imageUrl": "https://res.cloudinary.com/dsjkv1i54/image/upload/v1781433351/portfolio/projects/qfpmdaauaznf3ctqcijy.png",
+      "liveLink": "https://campus-sync-hub.vercel.app/",
+      "shortDescription": "Full-stack campus management platform with role-based portals for Admins and Faculty — featuring secure JWT auth, student/subject management, and a daily attendance ledger with history queries.",
+      "techStack": "Spring Boot, Java 17, React.js 19, Vite 7, MySQL, Spring Security, JWT, Spring Data JPA, Hibernate, Tailwind CSS 4, Axios, React Router DOM 7, REST APIs",
+      "title": "Campus Sync – Campus Attendance Management System",
+      "updatedAt": "2026-06-14T05:05:57.482Z"
+    },
+    {
+      "id": "4",
+      "createdAt": "2026-05-24T09:11:47.878Z",
+      "createdDate": "Mar 2025 – Jul 2025",
+      "detailedDescription": "Developed an AI-powered web application to help users practice group discussions with real-time feedback. Integrated Google Gemini API for intelligent coaching. Built with React and TypeScript for a smooth UI, Firebase for authentication and data storage, and Tailwind CSS for styling. Helps users improve communication and presentation skills before actual GD rounds.",
+      "githubLink": "https://github.com/RashmiSathe684/ai_gd_buddy",
+      "imageUrl": "https://res.cloudinary.com/dsjkv1i54/image/upload/v1781897380/portfolio/projects/qwrkwrqgqgnygm7dbgkz.png",
+      "liveLink": "https://ai-gd-buddy.vercel.app/",
+      "shortDescription": "AI-powered platform for real-time group discussion practice with automated feedback and communication analytics.",
+      "techStack": "React, TypeScript, Tailwind CSS, Firebase, Google Gemini API",
+      "title": "AI GD Helper Buddy – Your Personal GD Coach",
+      "updatedAt": "2026-06-19T14:00:05.540Z"
+    },
+    {
+      "id": "3",
+      "createdAt": "2026-05-24T09:09:11.684Z",
+      "createdDate": "Aug 2025 – May 2026",
+      "detailedDescription": "Built for Smart India Hackathon 2025. A decentralized platform to automate and secure blue carbon offset projects. Coordinated workflows between NGOs, verifiers, and admins for transparent carbon credit tracking using Solidity smart contracts on Ganache. React frontend with Tailwind CSS, Django REST backend, Dockerized deployment, and PostgreSQL database.",
+      "githubLink": "https://github.com/Ghanasham2004/BlueCarbonMRV",
+      "imageUrl": "https://res.cloudinary.com/dsjkv1i54/image/upload/v1781871201/portfolio/projects/ialbrbj6zjoycsavngsj.png",
+      "liveLink": "https://bluecarbonmrv.vercel.app/",
+      "shortDescription": "SIH 2025 — AI/ML powered carbon credit issuance with blockchain verification, interactive Leaflet maps, and TensorFlow.",
+      "techStack": "React, TensorFlow, Solidity, AWS, Tailwind CSS, Django, REST APIs, Docker, Ganache, PostgreSQL",
+      "title": "Blockchain-Based Blue Carbon Registry & MRV System",
+      "updatedAt": "2026-06-19T12:13:31.457Z"
+    },
+    {
+      "id": "2",
+      "createdAt": "2026-05-24T09:04:55.763Z",
+      "createdDate": "Apr  2026 - May 2026",
+      "detailedDescription": "Built a complete full-stack portfolio website with a Spring Boot backend and React.js frontend. Features a JWT-secured admin dashboard to manage profile photo, resume, projects, and certifications dynamically. Images are stored via Cloudinary. Data is persisted in PostgreSQL with Hibernate ORM. No redeployment needed to update content.",
+      "githubLink": "https://github.com/RashmiSathe684/dynamic-portoflio",
+      "imageUrl": "https://res.cloudinary.com/dsjkv1i54/image/upload/v1781871128/portfolio/projects/j72er8rlrrjagxnjot4g.png",
+      "liveLink": "https://rashmi-sathe-dynamic-portfolio.vercel.app/",
+      "shortDescription": "Full-stack dynamic portfolio site with a secure admin dashboard for real-time content management without redeployment.",
+      "techStack": "Spring Boot, React.js, PostgreSQL, Spring Security, JWT, Hibernate, Cloudinary, Tailwind CSS, REST APIs",
+      "title": "Dynamic Full-Stack Portfolio Application",
+      "updatedAt": "2026-06-19T12:12:15.611Z"
+    },
+    {
+      "id": "1",
+      "createdAt": "2026-05-24T09:02:57.789Z",
+      "createdDate": "Apr 2026 - Present",
+      "detailedDescription": "Managing remote interns without a structured system leads to untracked attendance, unclear task delegation, slow feedback cycles, and scattered team communication. This project solves all of that in one place.\nRole-Based Access\n\nThree roles — Admin, Manager, and Intern — each with their own dashboard and access restrictions. Admins manage the entire system, Managers handle tasks and reviews, Interns track their own work.\nAttendance Tracking\n\nInterns check in and check out daily. Working hours are auto-calculated server-side at checkout to prevent any client-side manipulation.\nTask Management\n\nAdmins and Managers assign tasks to individuals or entire teams with deadlines, priorities, and optional file attachments. Interns move tasks through a controlled lifecycle — Pending → In Progress → Completed. Managers can reject completed tasks with feedback for revision.\nWork Submission and Review\n\nInterns submit deliverables with a written work log and supporting file. Managers review submissions, preview the uploaded file, and approve or reject with a comment — creating a real feedback loop.\nProject and Team Management\n\nAdmins create projects, define teams, assign managers, and group interns under teams. Tasks can be assigned to a whole team or to a specific intern within one.\nMeeting Scheduler\n\nManagers schedule virtual meetings and invite participants. A unique meeting room link is auto-generated, and interns can join directly from their dashboard with one click.\nAnalytics Dashboard\n\nLive charts showing task completion rates, priority breakdown, 7-day attendance trends, and a top performer leaderboard.",
+      "githubLink": "https://github.com/RashmiSathe684/WFH-Productivity-and-Task-Management-System",
+      "imageUrl": "",
+      "liveLink": "",
+      "shortDescription": "A role-based Work-From-Home productivity platform that helps organizations manage remote interns — covering daily attendance, task assignment, work submission reviews, team coordination, and virtual meeting scheduling from a single unified dashboard.",
+      "techStack": "Java 17, Spring Boot 3.2, Spring MVC, Spring Data JPA, Spring Security 6, JWT (jjwt 0.12), Hibernate, MySQL, React.js 18, Vite, Tailwind CSS, Axios, React Router v6, Chart.js, React Hot Toast, Jitsi Meet",
+      "title": "WFH Productivity & Task Management System ",
+      "updatedAt": "2026-06-14T05:26:12.785Z"
+    }
+  ],
+  "achievements": [
+    {
+      "id": "7",
+      "achievementDate": "2024-12-09T18:30:00.000Z",
+      "createdAt": "2026-05-24T09:40:28.145Z",
+      "description": "Qualified Round 2 of MaTPO Programming Idol 2024, a national-level competitive programming contest. Demonstrated consistent algorithmic problem-solving ability across multiple rounds.",
+      "imageUrl": "https://res.cloudinary.com/dsjkv1i54/image/upload/v1779615577/portfolio/achievements/kjojnzgjbpmqctryysv9.png",
+      "title": "MaTPO Programming Idol 2024 – Round 2 Qualifier",
+      "updatedAt": "2026-05-24T09:40:28.147Z"
+    },
+    {
+      "id": "6",
+      "achievementDate": "2025-07-08T18:30:00.000Z",
+      "createdAt": "2026-05-24T09:32:47.262Z",
+      "description": "Shortlisted and advanced to the Coding Assessment Round in Flipkart GRiD 7.0, a national-level software development challenge organized by Flipkart for engineering students across India.",
+      "imageUrl": "https://res.cloudinary.com/dsjkv1i54/image/upload/v1779615151/portfolio/achievements/rrhfv7honrcuq48ek7rb.png",
+      "title": "Flipkart GRiD 7.0 – Coding Assessment Qualifier",
+      "updatedAt": "2026-05-24T09:32:47.262Z"
+    },
+    {
+      "id": "5",
+      "achievementDate": "2025-09-28T18:30:00.000Z",
+      "createdAt": "2026-05-24T09:28:33.858Z",
+      "description": "Secured 98.12 percentile and ranked #7544 (Round 2) in the Coding, Data Science & AI track of Naukri Campus Young Turks 2025 — a national-level assessment for engineering students across India.",
+      "imageUrl": "https://res.cloudinary.com/dsjkv1i54/image/upload/v1779614759/portfolio/achievements/cgiuedbb4wrm1qxmod1i.jpg,https://res.cloudinary.com/dsjkv1i54/image/upload/v1779614759/portfolio/achievements/kdi8fs0iojvbihd0wkdf.jpg",
+      "title": "Naukri Campus Young Turks 2025 – 98.12 Percentile",
+      "updatedAt": "2026-05-24T09:28:33.858Z"
+    },
+    {
+      "id": "4",
+      "achievementDate": "2025-10-09T18:30:00.000Z",
+      "createdAt": "2026-05-24T09:24:24.618Z",
+      "description": "Qualified Round 1 of TCS CodeVita Season 13, a prestigious global competitive programming contest organized by Tata Consultancy Services. Demonstrated strong problem-solving and algorithmic skills in a competitive environment.",
+      "imageUrl": "",
+      "title": "TCS CodeVita Season 13 – Round 1 Qualifier",
+      "updatedAt": "2026-05-24T18:41:03.952Z"
+    }
+  ],
+  "certifications": [
+    {
+      "id": "10",
+      "certificateLink": "https://drive.google.com/drive/folders/1jJG-9u517N_4eyFeZL1Tuj3CR6cU_R5d?usp=sharing",
+      "createdAt": "2026-05-24T10:17:18.341Z",
+      "description": "Completed a course on Generative AI Model Development by NxtWave. Covered fundamentals of large language models, prompt engineering, and practical AI application development.",
+      "imageUrl": "",
+      "issueDate": "2024-09-26T18:30:00.000Z",
+      "organization": "NxtWave",
+      "title": "Generative AI Model Development",
+      "updatedAt": "2026-05-24T10:17:18.346Z"
+    },
+    {
+      "id": "9",
+      "certificateLink": "https://drive.google.com/drive/folders/1L14EUL32V2p2wswVtg2bzxDJd44HnfRJ?usp=sharing",
+      "createdAt": "2026-05-24T10:15:05.467Z",
+      "description": "Certificate of Completion for a 4-week virtual internship in Python Programming at CodSoft. Completed with outstanding remarks. Certificate ID: b13f0f3.",
+      "imageUrl": "",
+      "issueDate": "2024-03-22T18:30:00.000Z",
+      "organization": "CodSoft",
+      "title": "Python Programming Virtual Internship Certificate",
+      "updatedAt": "2026-05-24T10:15:05.474Z"
+    },
+    {
+      "id": "8",
+      "certificateLink": "https://drive.google.com/drive/folders/18ItxoyKpC6v8MsL2JMFGRq6_xCjwMulS?usp=sharing",
+      "createdAt": "2026-05-24T10:13:34.614Z",
+      "description": "Certificate of Completion for a one-month virtual internship in Full-Stack Web Development at EduIntern (Feb 2024). Completed with outstanding compliments. Also received a Letter of Recommendation. Certificate ID: ED-IN-0713.",
+      "imageUrl": "",
+      "issueDate": "2024-03-25T18:30:00.000Z",
+      "organization": "EduIntern",
+      "title": "Full-Stack Web Development Internship Certificate",
+      "updatedAt": "2026-05-24T10:13:34.621Z"
+    },
+    {
+      "id": "7",
+      "certificateLink": "https://archive.nptel.ac.in/content/noc/NOC24/SEM2/Ecertificates/106/noc24-cs75/Course/NPTEL24CS75S14690002202728942.pdf",
+      "createdAt": "2026-05-24T10:11:07.311Z",
+      "description": "Completed the NPTEL course on Database Management System with an Elite grade. Covered relational models, SQL, normalization, transaction management, and database design principles.",
+      "imageUrl": "",
+      "issueDate": "2024-10-09T18:30:00.000Z",
+      "organization": "NPTEL (IIT)",
+      "title": "Database Management System – Elite Grade",
+      "updatedAt": "2026-05-24T10:11:07.311Z"
+    },
+    {
+      "id": "6",
+      "certificateLink": "https://www.credly.com/users/rashmi-sathe.4e328dd1",
+      "createdAt": "2026-05-24T10:09:14.707Z",
+      "description": "Completed 5 AWS Educate badges covering cloud computing fundamentals including cloud concepts, storage, compute, networking, and databases through hands-on labs and assessments.",
+      "imageUrl": "",
+      "issueDate": "2024-12-05T18:30:00.000Z",
+      "organization": "Amazon Web Services (AWS Educate)",
+      "title": "Cloud Computing Fundamentals (5 Badges)",
+      "updatedAt": "2026-05-24T10:09:14.707Z"
+    }
+  ],
+  "internships": [
+    {
+      "id": "4",
+      "certificateUrl": "https://drive.google.com/drive/folders/1dsg7tLa7KIsfs7SR549mKvTFbYeac-6L",
+      "company": "Vikramaa Technologies, Solapur",
+      "createdAt": "2026-05-24T09:17:55.756Z",
+      "description": "Completed a 2-month on-site internship focused on Advanced Java in a professional environment. Covered AWT, Swings, String Handling, Exception Handling, Collections, MySQL & JDBC connectivity, LC-RP architecture, and OOP principles. Gained first exposure to how Java is used in real codebases.",
+      "downloadUrl": "",
+      "duration": "Jul 2022 – Aug 2022",
+      "location": "Solapur, Maharashtra (On-site)",
+      "title": "Advanced Java Programming Intern",
+      "updatedAt": "2026-06-14T05:21:07.981Z",
+      "type": "Industrial Training"
+    },
+    {
+      "id": "3",
+      "certificateUrl": "https://drive.google.com/drive/folders/18ItxoyKpC6v8MsL2JMFGRq6_xCjwMulS",
+      "company": "EduIntern",
+      "createdAt": "2026-05-24T09:14:53.996Z",
+      "description": "Completed a one-month virtual internship in Full-Stack Web Development at EduIntern with outstanding compliments. Demonstrated remarkable technical proficiency, attention to detail, and consistently delivered high-quality work. Received a Letter of Recommendation. Certificate ID: ED-IN-0713.",
+      "downloadUrl": "",
+      "duration": "Feb 2024 – Mar 2024",
+      "location": "Remote / Virtual",
+      "title": "Full-Stack Web Development Intern",
+      "updatedAt": "2026-05-24T09:14:53.996Z",
+      "type": "Internship"
+    },
+    {
+      "id": "2",
+      "certificateUrl": "https://drive.google.com/drive/folders/1L14EUL32V2p2wswVtg2bzxDJd44HnfRJ",
+      "company": "CodSoft",
+      "createdAt": "2026-05-24T09:13:56.060Z",
+      "description": "Completed a 4-week virtual internship in Python Programming at CodSoft with outstanding remarks. Executed assigned tasks and projects demonstrating strong Python fundamentals, problem-solving skills, and consistent code quality. Certificate ID: b13f0f3.",
+      "downloadUrl": "",
+      "duration": "Feb 2024 – Mar 2024",
+      "location": "Remote / Virtual",
+      "title": "Python Programming Intern",
+      "updatedAt": "2026-05-24T09:13:56.060Z",
+      "type": "Internship"
+    },
+    {
+      "id": "1",
+      "certificateUrl": "https://drive.google.com/drive/folders/1ne0bz9SEctrh8nsswwSOND7La4gT5jLx?usp=sharing",
+      "company": "Kiran Academy, Pune",
+      "createdAt": "2026-05-24T09:12:56.763Z",
+      "description": "Selected through N.K. Orchid College of Engineering & Technology, Solapur (1 of 29 students) for Kiran Academy's placement-linked Java Full Stack Development Program. Gained practical experience in Java, Spring Boot, React.js, Hibernate, JDBC, REST APIs, and MySQL. Successfully designed, developed, and deployed Campus Sync, implementing JWT-based authentication, role-based access control, and database-driven workflows.",
+      "downloadUrl": "https://res.cloudinary.com/dsjkv1i54/image/upload/v1781872475/portfolio/internships/rm2s8em5ldwvuzbhxfdh.png",
+      "duration": "Sep 2025 – Jun 2026",
+      "location": "Pune, Maharashtra (Offline)",
+      "title": "Java Full Stack Development Trainee",
+      "updatedAt": "2026-06-19T12:35:43.543Z",
+      "type": "Industrial Training"
+    }
+  ],
+  "education": []
+}

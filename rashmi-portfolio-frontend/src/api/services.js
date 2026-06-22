@@ -92,15 +92,30 @@ export const sortItemsByDate = (items, dateField = 'createdDate') => {
   });
 };
 
+// Helper wrapper to refresh localStorage cache in the background after any successful dynamic data change
+const withCacheRefresh = (apiCall) => {
+  return (...args) => 
+    apiCall(...args).then((res) => {
+      API.get('/api/public/portfolio')
+        .then((detailsRes) => {
+          if (detailsRes.data) {
+            localStorage.setItem('portfolio_data', JSON.stringify(detailsRes.data));
+          }
+        })
+        .catch((err) => console.error("Failed to background refresh portfolio cache:", err));
+      return res;
+    });
+};
+
 // AUTH
 export const loginAdmin = (data) => API.post('/api/auth/login', data);
 
 // PROJECTS
 export const getProjects = (params) => API.get('/api/projects', { params });
 export const getProject = (id) => API.get(`/api/projects/${id}`);
-export const createProject = (data) => API.post('/api/projects', data);
-export const updateProject = (id, data) => API.put(`/api/projects/${id}`, data);
-export const deleteProject = (id) => API.delete(`/api/projects/${id}`);
+export const createProject = withCacheRefresh((data) => API.post('/api/projects', data));
+export const updateProject = withCacheRefresh((id, data) => API.put(`/api/projects/${id}`, data));
+export const deleteProject = withCacheRefresh((id) => API.delete(`/api/projects/${id}`));
 export const uploadProjectImage = (file) => {
   const fd = new FormData();
   fd.append('file', file);
@@ -109,9 +124,9 @@ export const uploadProjectImage = (file) => {
 
 // ACHIEVEMENTS
 export const getAchievements = (params) => API.get('/api/achievements', { params });
-export const createAchievement = (data) => API.post('/api/achievements', data);
-export const updateAchievement = (id, data) => API.put(`/api/achievements/${id}`, data);
-export const deleteAchievement = (id) => API.delete(`/api/achievements/${id}`);
+export const createAchievement = withCacheRefresh((data) => API.post('/api/achievements', data));
+export const updateAchievement = withCacheRefresh((id, data) => API.put(`/api/achievements/${id}`, data));
+export const deleteAchievement = withCacheRefresh((id) => API.delete(`/api/achievements/${id}`));
 export const uploadAchievementImage = (file) => {
   const fd = new FormData();
   fd.append('file', file);
@@ -120,9 +135,9 @@ export const uploadAchievementImage = (file) => {
 
 // CERTIFICATIONS
 export const getCertifications = (params) => API.get('/api/certifications', { params });
-export const createCertification = (data) => API.post('/api/certifications', data);
-export const updateCertification = (id, data) => API.put(`/api/certifications/${id}`, data);
-export const deleteCertification = (id) => API.delete(`/api/certifications/${id}`);
+export const createCertification = withCacheRefresh((data) => API.post('/api/certifications', data));
+export const updateCertification = withCacheRefresh((id, data) => API.put(`/api/certifications/${id}`, data));
+export const deleteCertification = withCacheRefresh((id) => API.delete(`/api/certifications/${id}`));
 export const uploadCertificationImage = (file) => {
   const fd = new FormData();
   fd.append('file', file);
@@ -136,9 +151,9 @@ export const deleteContactMessage = (id) => API.delete(`/api/contact/${id}`);
 
 // INTERNSHIPS
 export const getInternships = () => API.get('/api/internships');
-export const createInternship = (data) => API.post('/api/internships', data);
-export const updateInternship = (id, data) => API.put(`/api/internships/${id}`, data);
-export const deleteInternship = (id) => API.delete(`/api/internships/${id}`);
+export const createInternship = withCacheRefresh((data) => API.post('/api/internships', data));
+export const updateInternship = withCacheRefresh((id, data) => API.put(`/api/internships/${id}`, data));
+export const deleteInternship = withCacheRefresh((id) => API.delete(`/api/internships/${id}`));
 export const uploadInternshipFile = (file) => {
   const fd = new FormData();
   fd.append('file', file);
@@ -147,18 +162,18 @@ export const uploadInternshipFile = (file) => {
 
 // EDUCATION
 export const getEducation = () => API.get('/api/education');
-export const createEducation = (data) => API.post('/api/education', data);
-export const deleteEducation = (id) => API.delete(`/api/education/${id}`);
+export const createEducation = withCacheRefresh((data) => API.post('/api/education', data));
+export const deleteEducation = withCacheRefresh((id) => API.delete(`/api/education/${id}`));
 
 // SKILLS
 export const getSkills = () => API.get('/api/skills');
 export const getSkillsByCategory = (category) => API.get(`/api/skills/category/${category}`);
-export const createSkill = (data) => API.post('/api/skills', data);
-export const deleteSkill = (id) => API.delete(`/api/skills/${id}`);
+export const createSkill = withCacheRefresh((data) => API.post('/api/skills', data));
+export const deleteSkill = withCacheRefresh((id) => API.delete(`/api/skills/${id}`));
 
 // PROFILE SETTINGS
 export const getProfileSettings = () => API.get('/api/profile');
-export const updateProfileSettings = (data) => API.post('/api/profile/update', data);
+export const updateProfileSettings = withCacheRefresh((data) => API.post('/api/profile/update', data));
 export const uploadFile = (file) => {
   const formData = new FormData();
   formData.append('file', file);

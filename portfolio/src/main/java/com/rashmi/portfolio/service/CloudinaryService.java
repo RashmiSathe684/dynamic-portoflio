@@ -16,18 +16,8 @@ public class CloudinaryService {
     private final Cloudinary cloudinary;
 
     public String uploadImage(MultipartFile file, String folder) throws IOException {
-        String originalFilename = file.getOriginalFilename();
-        if (originalFilename != null && originalFilename.toLowerCase().endsWith(".pdf")) {
-            java.nio.file.Path uploadPath = java.nio.file.Paths.get("uploads");
-            if (!java.nio.file.Files.exists(uploadPath)) {
-                java.nio.file.Files.createDirectories(uploadPath);
-            }
-            String cleanedName = originalFilename.replaceAll("\\s+", "_");
-            String fileName = java.util.UUID.randomUUID().toString() + "_" + cleanedName;
-            java.nio.file.Path filePath = uploadPath.resolve(fileName);
-            java.nio.file.Files.copy(file.getInputStream(), filePath);
-            return fileName;
-        }
+        // PDFs, images, and other resources are all uploaded directly to Cloudinary using auto resource detection
+
 
         Map uploadResult = cloudinary.uploader().upload(
             file.getBytes(),

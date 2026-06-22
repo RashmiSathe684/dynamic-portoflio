@@ -11,16 +11,30 @@ import InternshipSection from './sections/InternshipSection';
 import EducationSection from './sections/EducationSection';
 import ContactSection from './sections/ContactSection';
 import { getPortfolioDetails } from '../../api/services';
+import fallbackPortfolioData from '../../data/portfolio-static.json';
 
 export default function Portfolio() {
   const [previewImage, setPreviewImage] = useState(null);
-  const [portfolioData, setPortfolioData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [portfolioData, setPortfolioData] = useState(() => {
+    try {
+      const cached = localStorage.getItem('portfolio_data');
+      if (cached) {
+        return JSON.parse(cached);
+      }
+    } catch (err) {
+      console.error("Failed to load cached portfolio details:", err);
+    }
+    return fallbackPortfolioData;
+  });
+  const [isLoading, setIsLoading] = useState(!portfolioData);
 
   useEffect(() => {
     getPortfolioDetails()
       .then((res) => {
-        if (res.data) setPortfolioData(res.data);
+        if (res.data) {
+          setPortfolioData(res.data);
+          localStorage.setItem('portfolio_data', JSON.stringify(res.data));
+        }
       })
       .catch((err) => {
         console.error("Failed to fetch portfolio details:", err);
