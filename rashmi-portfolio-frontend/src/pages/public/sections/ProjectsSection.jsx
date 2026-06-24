@@ -2,29 +2,6 @@ import { useState, useEffect } from 'react';
 import { getProjects, resolveUrl, sortItemsByDate } from '../../../api/services';
 import { FiSearch, FiGithub, FiExternalLink, FiEye } from 'react-icons/fi';
 
-const fallbackProjects = [
-  {
-    id: 'f1',
-    title: 'Campus Sync - Student Collaboration Portal',
-    shortDescription: 'A full stack collaboration platform enabling campus events organization, student discussion forums, and automated Gmail notifications with JWT authorization.',
-    techStack: 'Spring Boot, Java, React, PostgreSQL, TailwindCSS, REST APIs',
-    createdDate: 'MAY 2026',
-    githubLink: 'https://github.com/RashmiSathe684',
-    liveLink: '',
-    imageUrl: ''
-  },
-  {
-    id: 'f2',
-    title: 'Dynamic Developer Portfolio App',
-    shortDescription: 'A premium, responsive dev portfolio utilizing dynamic settings management from a Spring Boot API, custom HSL theme settings, and Neon PostgreSQL storage.',
-    techStack: 'React, Node, Spring Boot, PostgreSQL, Neon AWS, Framer Motion',
-    createdDate: 'JUN 2026',
-    githubLink: 'https://github.com/RashmiSathe684/dynamic-portoflio',
-    liveLink: '',
-    imageUrl: ''
-  }
-];
-
 export default function ProjectsSection({ projects: initialProjects, onPreview }) {
   const [projects, setProjects] = useState([]);
   const [search, setSearch] = useState('');
@@ -50,10 +27,8 @@ export default function ProjectsSection({ projects: initialProjects, onPreview }
     }
   }, [initialProjects]);
 
-  const dataList = projects.length > 0 ? projects : fallbackProjects;
-
   // Filter projects by search query
-  const filteredData = dataList.filter((item) => {
+  const filteredData = projects.filter((item) => {
     const term = search.toLowerCase();
     return (
       item.title.toLowerCase().includes(term) ||
@@ -136,7 +111,7 @@ export default function ProjectsSection({ projects: initialProjects, onPreview }
         <div className="proj-grid grid grid-cols-1 md:grid-cols-2 gap-6">
           {paginatedData.length === 0 ? (
             <div className="md:col-span-2 text-center py-12 text-slate-400 font-medium select-none text-sm bg-white/5 border border-brand-border/60 rounded-3xl">
-              No projects matched your criteria.
+              {search ? "No projects matched your criteria." : "No projects uploaded yet."}
             </div>
           ) : (
             paginatedData.map((project) => {

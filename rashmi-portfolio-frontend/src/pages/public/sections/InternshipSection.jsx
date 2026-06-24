@@ -2,18 +2,6 @@ import { useState, useEffect } from 'react';
 import { getInternships, resolveUrl, sortItemsByDate } from '../../../api/services';
 import { FiCalendar, FiExternalLink, FiEye } from 'react-icons/fi';
 
-const fallbackInternship = [
-  {
-    id: 'i1',
-    title: 'Backend Development Intern',
-    company: 'CodeAlpha',
-    location: 'Remote',
-    duration: '3 Months (May 26 – Jun 26)',
-    description: 'Designed, developed, and tested robust backend RESTful APIs using Spring Boot, JPA, and PostgreSQL. Optimised schema design, implemented custom repository queries, integrated BCrypt authentication, and created automated test scenarios resulting in a 40% reduction in API response latency.',
-    certificateUrl: ''
-  }
-];
-
 export default function InternshipSection({ internships: initialInternships, onPreview }) {
   const [internships, setInternships] = useState([]);
 
@@ -29,8 +17,6 @@ export default function InternshipSection({ internships: initialInternships, onP
     }
   }, [initialInternships]);
 
-  const dataList = internships.length > 0 ? internships : fallbackInternship;
-
   return (
     <section id="experience" className="section py-20 px-6 md:px-20 relative z-10 transition-colors duration-500">
       <div className="eyebrow block text-[11px] font-bold uppercase tracking-[2.5px] text-accent mb-2">
@@ -41,12 +27,17 @@ export default function InternshipSection({ internships: initialInternships, onP
       </h2>
 
       <div className="flex flex-col gap-4">
-        {dataList.map((intern) => {
-          const docUrl = resolveUrl(intern.downloadUrl);
-          const hasLinks = intern.certificateUrl || intern.downloadUrl;
+        {internships.length === 0 ? (
+          <div className="text-center py-10 text-brand-muted text-sm border border-dashed border-brand-border/40 rounded-2xl bg-brand-surface/20 select-none">
+            No work experience uploaded yet.
+          </div>
+        ) : (
+          internships.map((intern) => {
+            const docUrl = resolveUrl(intern.downloadUrl);
+            const hasLinks = intern.certificateUrl || intern.downloadUrl;
 
-          return (
-            <div key={intern.id} className="intern-card select-text">
+            return (
+              <div key={intern.id} className="intern-card select-text">
               {/* Vertical Gradient Stripe */}
               <div className="intern-stripe select-none"></div>
 
@@ -100,7 +91,7 @@ export default function InternshipSection({ internships: initialInternships, onP
               </div>
             </div>
           );
-        })}
+        }))}
       </div>
     </section>
   );

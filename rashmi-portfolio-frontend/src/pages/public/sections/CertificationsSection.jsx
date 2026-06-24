@@ -2,50 +2,8 @@ import { useState, useEffect } from 'react';
 import { getCertifications, resolveUrl } from '../../../api/services';
 import { FiCloud, FiAward, FiBookOpen, FiCpu, FiBriefcase, FiFileText, FiEye, FiExternalLink } from 'react-icons/fi';
 
-const fallbackCerts = [
-  {
-    id: 'c1',
-    organization: 'Amazon Web Services',
-    title: 'AWS Educate: Cloud Computing Fundamentals',
-    issueDate: '5 badges earned',
-    certificateLink: 'https://aws.amazon.com/education/aws-educate/',
-    imageUrl: ''
-  },
-  {
-    id: 'c2',
-    organization: 'NPTEL / SWAYAM',
-    title: 'Database Management System with "Elite"',
-    issueDate: 'Nov 2024',
-    certificateLink: 'https://nptel.ac.in/',
-    imageUrl: ''
-  },
-  {
-    id: 'c3',
-    organization: 'Infosys Springboard',
-    title: 'Basics of Python Programming',
-    issueDate: '2024',
-    certificateLink: 'https://springboard.infosys.com/',
-    imageUrl: ''
-  },
-  {
-    id: 'c4',
-    organization: 'NxTWave',
-    title: 'Generative AI Model Development',
-    issueDate: '2024',
-    certificateLink: 'https://www.nxtwave.in/',
-    imageUrl: ''
-  },
-  {
-    id: 'c5',
-    organization: 'LinkedIn Learning',
-    title: 'Blockchain-Based Blue Carbon Registry',
-    issueDate: '2025',
-    certificateLink: 'https://www.linkedin.com/learning/',
-    imageUrl: ''
-  }
-];
-
 const getCertMeta = (orgName) => {
+  if (!orgName) return { icon: <FiFileText size={16} />, bg: 'rgba(148,163,184,0.1)', color: 'var(--muted)', border: '1px solid rgba(148,163,184,0.25)' };
   const o = orgName.toLowerCase();
   if (o.includes('amazon') || o.includes('aws')) {
     return { icon: <FiCloud size={16} />, bg: 'rgba(253,186,116,0.15)', color: 'var(--peach)', border: '1px solid rgba(253,186,116,0.3)' };
@@ -80,12 +38,11 @@ export default function CertificationsSection({ certifications: initialCerts, on
     }
   }, [initialCerts]);
 
-  const dataList = certs.length > 0 ? certs : fallbackCerts;
   const pageSize = 5;
-  const totalFilteredPages = Math.ceil(dataList.length / pageSize) || 1;
+  const totalFilteredPages = Math.ceil(certs.length / pageSize) || 1;
   const currentPage = Math.min(page, totalFilteredPages - 1);
   const activePage = currentPage >= 0 ? currentPage : 0;
-  const paginatedData = dataList.slice(activePage * pageSize, (activePage + 1) * pageSize);
+  const paginatedData = certs.slice(activePage * pageSize, (activePage + 1) * pageSize);
 
   return (
     <section id="certifications" className="section alt py-20 px-6 md:px-20 relative z-10 transition-colors duration-500">
@@ -97,7 +54,12 @@ export default function CertificationsSection({ certifications: initialCerts, on
       </h2>
 
       <div className="cert-list flex flex-col gap-3 select-text">
-        {paginatedData.map((cert) => {
+        {paginatedData.length === 0 ? (
+          <div className="text-center py-10 text-brand-muted text-sm border border-dashed border-brand-border/40 rounded-2xl bg-brand-surface/20">
+            No certifications uploaded yet.
+          </div>
+        ) : (
+          paginatedData.map((cert) => {
           const meta = getCertMeta(cert.organization);
           const photoUrl = resolveUrl(cert.imageUrl);
 
@@ -151,7 +113,7 @@ export default function CertificationsSection({ certifications: initialCerts, on
               </div>
             </div>
           );
-        })}
+        }))}
       </div>
 
       {/* Pagination Controls */}

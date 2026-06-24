@@ -2,37 +2,6 @@ import { useState, useEffect } from 'react';
 import { getAchievements, resolveUrl } from '../../../api/services';
 import { FiAward, FiEye } from 'react-icons/fi';
 
-const fallbackAchievements = [
-  {
-    id: 'a1',
-    title: 'Naukri Campus Young Turks 2025',
-    description: "98.12 percentile · Certificate of Merit · Ranked #9589 (Round 1) and #7544 (Round 2) in Coding, Data Science & AI — India's largest national skill competition.",
-    achievementDate: '2025-01-01',
-    imageUrl: ''
-  },
-  {
-    id: 'a2',
-    title: 'TCS CodeVita Season 13 (2025)',
-    description: 'Successfully qualified Round 1 of the global competitive programming contest by TCS — Zone 1.',
-    achievementDate: '2025-02-01',
-    imageUrl: ''
-  },
-  {
-    id: 'a3',
-    title: 'Flipkart GRiD 7.0 — Software Dev Track',
-    description: 'Shortlisted in Flipkart Early Careers flagship challenge. Advanced to Coding Assessment Round with official recognition.',
-    achievementDate: '2025-03-01',
-    imageUrl: ''
-  },
-  {
-    id: 'a4',
-    title: 'MaTPO Programming Idol 2024',
-    description: 'Advanced to Round 2 of the national-level competitive programming contest.',
-    achievementDate: '2024-01-01',
-    imageUrl: ''
-  }
-];
-
 export default function AchievementsSection({ achievements: initialAchievements, onPreview }) {
   const [achievements, setAchievements] = useState([]);
   const [page, setPage] = useState(0);
@@ -51,12 +20,11 @@ export default function AchievementsSection({ achievements: initialAchievements,
     }
   }, [initialAchievements]);
 
-  const dataList = achievements.length > 0 ? achievements : fallbackAchievements;
   const pageSize = 4;
-  const totalFilteredPages = Math.ceil(dataList.length / pageSize) || 1;
+  const totalFilteredPages = Math.ceil(achievements.length / pageSize) || 1;
   const currentPage = Math.min(page, totalFilteredPages - 1);
   const activePage = currentPage >= 0 ? currentPage : 0;
-  const paginatedData = dataList.slice(activePage * pageSize, (activePage + 1) * pageSize);
+  const paginatedData = achievements.slice(activePage * pageSize, (activePage + 1) * pageSize);
 
   return (
     <section id="achievements" className="section py-20 px-6 md:px-20 relative z-10 transition-colors duration-500">
@@ -68,8 +36,13 @@ export default function AchievementsSection({ achievements: initialAchievements,
       </h2>
 
       <div className="flex flex-col gap-3.5 select-text">
-        {paginatedData.map((ach) => {
-          const year = ach.achievementDate 
+        {paginatedData.length === 0 ? (
+          <div className="text-center py-10 text-brand-muted text-sm border border-dashed border-brand-border/40 rounded-2xl bg-brand-surface/20">
+            No achievements uploaded yet.
+          </div>
+        ) : (
+          paginatedData.map((ach) => {
+            const year = ach.achievementDate 
             ? ach.achievementDate.split('-')[0] 
             : '2025';
 
@@ -129,7 +102,7 @@ export default function AchievementsSection({ achievements: initialAchievements,
               </div>
             </div>
           );
-        })}
+        }))}
       </div>
 
       {/* Pagination Controls */}
