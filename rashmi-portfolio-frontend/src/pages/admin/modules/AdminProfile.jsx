@@ -2,13 +2,14 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { FiCheck, FiFileText, FiUser } from 'react-icons/fi';
 import { getProfileSettings, updateProfileSettings, uploadFile, resolveUrl } from '../../../api/services';
+import CustomAlert from '../../../components/CustomAlert';
 
 export default function AdminProfile() {
   const [settings, setSettings] = useState({ profilePhotoUrl: '', resumeUrl: '' });
   const [photoFile, setPhotoFile] = useState(null);
   const [resumeFile, setResumeFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState('');
+  const [alert, setAlert] = useState(null);
   const [photoError, setPhotoError] = useState(false);
 
   const fetchSettings = useCallback(() => {
@@ -34,7 +35,6 @@ export default function AdminProfile() {
     if (!file) return;
 
     setLoading(true);
-    setStatus(`Uploading ${type}...`);
     try {
       const res = await uploadFile(file);
       const fileName = res.data;
@@ -45,15 +45,14 @@ export default function AdminProfile() {
 
       await updateProfileSettings(newSettings);
       setSettings(newSettings);
-      setStatus(`${type.charAt(0).toUpperCase() + type.slice(1)} updated successfully!`);
+      setAlert({ message: `${type.charAt(0).toUpperCase() + type.slice(1)} updated successfully!`, type: 'success' });
       if (type === 'photo') setPhotoFile(null);
       else setResumeFile(null);
     } catch (err) {
       console.error(err);
-      setStatus(`Failed to upload ${type}`);
+      setAlert({ message: `Failed to update ${type}.`, type: 'error' });
     } finally {
       setLoading(false);
-      setTimeout(() => setStatus(''), 3000);
     }
   };
 
@@ -154,15 +153,7 @@ export default function AdminProfile() {
         </div>
       </div>
 
-      {status && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="p-4 bg-brand-dark text-white rounded-xl text-center text-xs font-bold"
-        >
-          {status}
-        </motion.div>
-      )}
+      {alert && <CustomAlert {...alert} onClose={() => setAlert(null)} />}
     </div>
   );
 }
