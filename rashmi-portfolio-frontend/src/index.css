@@ -1373,7 +1373,7 @@ h1, h2, h3, h4 {
 /* Premium Form Styling for Light/Dark Theme Consistency */
 form.space-y-8,
 .form-card form {
-  background: var(--bg2) !important;
+  background: var(--card) !important;
   border-color: var(--border) !important;
 }
 

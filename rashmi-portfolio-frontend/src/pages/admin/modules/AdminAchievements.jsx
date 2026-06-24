@@ -16,6 +16,7 @@ export default function AdminAchievements() {
   const [items, setItems] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [alert, setAlert] = useState(null);
+  const [showAdd, setShowAdd] = useState(false);
 
   const [form, setForm] = useState({
     title: '',
@@ -80,6 +81,7 @@ export default function AdminAchievements() {
       imageUrls: [],
     });
     setEditingId(null);
+    setShowAdd(false);
   };
 
   const handleSubmit = async (e) => {
@@ -116,6 +118,7 @@ export default function AdminAchievements() {
       achievementDate: item.achievementDate || '',
       imageUrls: item.imageUrl ? item.imageUrl.split(',') : [],
     });
+    setShowAdd(true);
     setTimeout(() => {
       formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
@@ -140,98 +143,102 @@ export default function AdminAchievements() {
       
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-brand-dark">
-          {editingId ? 'Edit Achievement' : 'Add New Achievement'}
+          {editingId ? 'Edit Achievement' : 'Achievements'}
         </h2>
-        {editingId && (
-          <button onClick={resetForm} className="text-sm font-bold text-brand-primary">
-            + New Achievement
-          </button>
-        )}
+        <button
+          onClick={() => {
+            if (showAdd) resetForm();
+            else setShowAdd(true);
+          }}
+          className="flex items-center gap-2 px-4 py-2 bg-brand-primary text-white rounded-xl text-sm font-bold shadow-lg shadow-brand-primary/20"
+        >
+          {showAdd ? 'Cancel' : <><FaPlus /> Add New</>}
+        </button>
       </div>
 
       {/* FORM */}
-      <form ref={formRef} onSubmit={handleSubmit} className="space-y-8 bg-brand-surface border border-brand-border/60 p-4 sm:p-8 rounded-3xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+      {showAdd && (
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-8 bg-brand-surface border border-brand-border/60 p-4 sm:p-8 rounded-3xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-brand-gray ml-1">Title</label>
+              <input
+                type="text"
+                name="title"
+                placeholder="e.g. Winner of Hackathon 2024"
+                value={form.title}
+                onChange={handleChange}
+                required
+                className="w-full p-4 rounded-2xl bg-brand-bg/40 border border-brand-border/80 text-text-main placeholder-brand-muted/70 focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-bold text-brand-gray ml-1">Date</label>
+              <input
+                type="date"
+                name="achievementDate"
+                value={form.achievementDate}
+                onChange={handleChange}
+                className="w-full p-4 rounded-2xl bg-brand-bg/40 border border-brand-border/80 text-text-main focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
+              />
+            </div>
+          </div>
+
           <div className="space-y-2">
-            <label className="text-sm font-bold text-brand-gray ml-1">Title</label>
-            <input
-              type="text"
-              name="title"
-              placeholder="e.g. Winner of Hackathon 2024"
-              value={form.title}
+            <label className="text-sm font-bold text-brand-gray ml-1">Description</label>
+            <textarea
+              name="description"
+              placeholder="Tell us about this milestone..."
+              rows="4"
+              value={form.description}
               onChange={handleChange}
-              required
               className="w-full p-4 rounded-2xl bg-brand-bg/40 border border-brand-border/80 text-text-main placeholder-brand-muted/70 focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
             />
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-bold text-brand-gray ml-1">Date</label>
-            <input
-              type="date"
-              name="achievementDate"
-              value={form.achievementDate}
-              onChange={handleChange}
-              className="w-full p-4 rounded-2xl bg-brand-bg/40 border border-brand-border/80 text-text-main focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-            />
+          <div className="space-y-4">
+            <label className="text-sm font-bold text-brand-gray ml-1">Certificates / Proof Images</label>
+            <div className="flex items-center justify-center w-full">
+              <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-brand-border border-dashed rounded-2xl cursor-pointer bg-brand-bg/40 hover:bg-brand-bg/70 transition-all">
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                  <FaPlus className="text-brand-muted mb-2" />
+                  <p className="text-sm text-brand-muted">Click to upload multiple images</p>
+                </div>
+                <input type="file" multiple onChange={handleImageUpload} className="hidden" />
+              </label>
+            </div>
           </div>
-        </div>
 
-        <div className="space-y-2">
-          <label className="text-sm font-bold text-brand-gray ml-1">Description</label>
-          <textarea
-            name="description"
-            placeholder="Tell us about this milestone..."
-            rows="4"
-            value={form.description}
-            onChange={handleChange}
-            className="w-full p-4 rounded-2xl bg-brand-bg/40 border border-brand-border/80 text-text-main placeholder-brand-muted/70 focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-          />
-        </div>
+          {form.imageUrls.length > 0 && (
+            <div className="flex flex-wrap gap-4 p-4 bg-brand-bg/40 rounded-2xl border border-brand-border shadow-sm">
+              {form.imageUrls.map((url, idx) => (
+                <div key={idx} className="relative group">
+                  <img
+                    src={url}
+                    alt="preview"
+                    className="w-24 h-24 object-cover rounded-xl border border-brand-border"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeImage(idx)}
+                    className="absolute -top-2 -right-2 bg-red-500 text-white p-1.5 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <FaTimes size={12} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
 
-        <div className="space-y-4">
-          <label className="text-sm font-bold text-brand-gray ml-1">Certificates / Proof Images</label>
-          <div className="flex items-center justify-center w-full">
-            <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-brand-border border-dashed rounded-2xl cursor-pointer bg-brand-bg/40 hover:bg-brand-bg/70 transition-all">
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <FaPlus className="text-brand-muted mb-2" />
-                <p className="text-sm text-brand-muted">Click to upload multiple images</p>
-              </div>
-              <input type="file" multiple onChange={handleImageUpload} className="hidden" />
-            </label>
-          </div>
-        </div>
-
-        {form.imageUrls.length > 0 && (
-          <div className="flex flex-wrap gap-4 p-4 bg-brand-bg/40 rounded-2xl border border-brand-border shadow-sm">
-            {form.imageUrls.map((url, idx) => (
-              <div key={idx} className="relative group">
-                <img
-                  src={url}
-                  alt="preview"
-                  className="w-24 h-24 object-cover rounded-xl border border-brand-border"
-                />
-                <button
-                  type="button"
-                  onClick={() => removeImage(idx)}
-                  className="absolute -top-2 -right-2 bg-red-500 text-white p-1.5 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <FaTimes size={12} />
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div className="flex flex-col sm:flex-row gap-4 pt-4">
-          <button
-            type="submit"
-            className="w-full sm:w-auto px-6 py-3.5 sm:px-8 sm:py-4 bg-brand-primary text-white rounded-2xl font-bold shadow-lg shadow-brand-primary/20 hover:shadow-xl transition-all text-sm sm:text-base"
-          >
-            {editingId ? 'Update Achievement' : 'Save Achievement'}
-          </button>
-          
-          {editingId && (
+          <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            <button
+              type="submit"
+              className="w-full sm:w-auto px-6 py-3.5 sm:px-8 sm:py-4 bg-brand-primary text-white rounded-2xl font-bold shadow-lg shadow-brand-primary/20 hover:shadow-xl transition-all text-sm sm:text-base"
+            >
+              {editingId ? 'Update Achievement' : 'Save Achievement'}
+            </button>
+            
             <button
               type="button"
               onClick={resetForm}
@@ -239,9 +246,9 @@ export default function AdminAchievements() {
             >
               Cancel
             </button>
-          )}
-        </div>
-      </form>
+          </div>
+        </form>
+      )}
 
       {/* LIST */}
       <div className="space-y-4">
