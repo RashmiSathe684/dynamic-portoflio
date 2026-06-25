@@ -2,6 +2,32 @@ import { useState, useEffect } from 'react';
 import { getEducation } from '../../../api/services';
 import { FiBook, FiBookOpen, FiAward } from 'react-icons/fi';
 
+const fallbackEducation = [
+  { 
+    id: 'e1',
+    degree: 'B.Tech - Computer Science & Engineering', 
+    institution: 'N.K. Orchid College of Engg. & Technology, Solapur', 
+    score: '8.33 / 10', 
+    duration: '2023 – 2026', 
+    iconType: 'GRAD' 
+  },
+  { 
+    id: 'e2',
+    degree: 'Diploma - Computer Technology', 
+    institution: 'Government Polytechnic, Solapur', 
+    score: '87.89%', 
+    duration: '2020 – 2023', 
+    iconType: 'BOOK' 
+  },
+  { 
+    id: 'e3',
+    degree: 'Class X - CBSE Board', 
+    institution: 'Kendriya Vidyalaya, Solapur', 
+    score: '84.6%', 
+    duration: '2019 – 2020', 
+    iconType: 'SCHOOL' 
+  }
+];
 
 const getEduIcon = (type) => {
   switch (type ? type.toUpperCase() : 'DEFAULT') {
@@ -60,6 +86,8 @@ export default function EducationSection({ education: initialEducation }) {
     }
   }, [initialEducation]);
 
+  const displayList = education.length > 0 ? education : fallbackEducation;
+
   return (
     <section id="education" className="section alt py-20 px-6 md:px-20 relative z-10 transition-colors duration-500">
       <div className="eyebrow block text-[11px] font-bold uppercase tracking-[2.5px] text-accent mb-2">
@@ -71,16 +99,11 @@ export default function EducationSection({ education: initialEducation }) {
 
       {/* Wrapped in a single beautiful glass card */}
       <div className="glass-card flex flex-col gap-0 select-text">
-        {education.length === 0 ? (
-          <div className="text-center py-8 text-brand-muted text-sm select-none">
-            No education records uploaded yet.
-          </div>
-        ) : (
-          education.map((edu, i) => {
+        {displayList.map((edu, i) => {
           const icon = getEduIcon(edu.iconType);
           const iconStyle = getEduIconStyle(edu.iconType);
           const scoreStr = edu.score || '';
-          const displayScore = scoreStr ? (scoreStr.includes('%') || scoreStr.toLowerCase().includes('cgpa') ? scoreStr : `${scoreStr} CGPA`) : '';
+          const displayScore = scoreStr ? (scoreStr.includes('%') || scoreStr.toLowerCase().includes('cgpa') || scoreStr.toLowerCase().includes('/ 10') ? scoreStr : `${scoreStr} CGPA`) : '';
 
           return (
             <div key={edu.id || i} className="edu-row">
@@ -116,7 +139,7 @@ export default function EducationSection({ education: initialEducation }) {
               </div>
             </div>
           );
-        }))}
+        })}
       </div>
     </section>
   );
