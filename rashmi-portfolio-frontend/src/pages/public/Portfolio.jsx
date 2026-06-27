@@ -64,11 +64,7 @@ export default function Portfolio() {
       });
     };
 
-    getPortfolioDetails()
-      .catch((err) => {
-        console.warn("Consolidated endpoint failed, falling back to individual endpoints...", err);
-        return fetchIndividualDetails();
-      })
+    fetchIndividualDetails()
       .then((res) => {
         if (res.data) {
           setPortfolioData(res.data);

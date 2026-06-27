@@ -92,17 +92,36 @@ export const sortItemsByDate = (items, dateField = 'createdDate') => {
   });
 };
 
-// Helper wrapper to refresh localStorage cache in the background after any successful dynamic data change
+// Helper to refresh localStorage cache in the background by fetching individual endpoints
+const refreshPortfolioCache = () => {
+  return Promise.all([
+    API.get('/api/profile'),
+    API.get('/api/skills'),
+    API.get('/api/projects', { params: { page: 0, size: 100 } }),
+    API.get('/api/achievements', { params: { page: 0, size: 100 } }),
+    API.get('/api/certifications', { params: { page: 0, size: 100 } }),
+    API.get('/api/internships'),
+    API.get('/api/education')
+  ])
+  .then(([profileRes, skillsRes, projectsRes, achievementsRes, certificationsRes, internshipsRes, educationRes]) => {
+    const data = {
+      profile: profileRes.data,
+      skills: skillsRes.data,
+      projects: projectsRes.data?.content || [],
+      achievements: achievementsRes.data?.content || [],
+      certifications: certificationsRes.data?.content || [],
+      internships: internshipsRes.data || [],
+      education: educationRes.data || []
+    };
+    localStorage.setItem('portfolio_data', JSON.stringify(data));
+  })
+  .catch((err) => console.error("Failed to background refresh portfolio cache:", err));
+};
+
 const withCacheRefresh = (apiCall) => {
   return (...args) => 
     apiCall(...args).then((res) => {
-      API.get('/api/public/portfolio')
-        .then((detailsRes) => {
-          if (detailsRes.data) {
-            localStorage.setItem('portfolio_data', JSON.stringify(detailsRes.data));
-          }
-        })
-        .catch((err) => console.error("Failed to background refresh portfolio cache:", err));
+      refreshPortfolioCache();
       return res;
     });
 };
