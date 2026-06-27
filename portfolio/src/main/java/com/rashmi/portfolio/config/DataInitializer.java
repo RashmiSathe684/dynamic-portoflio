@@ -16,8 +16,8 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // Create admin only if not exists
-        if (adminUserRepository.findByUsername("rashmi_admin").isEmpty()) {
+        var adminOpt = adminUserRepository.findByUsername("rashmi_admin");
+        if (adminOpt.isEmpty()) {
             AdminUser admin = AdminUser.builder()
                     .username("rashmi_admin")
                     .password(passwordEncoder.encode("Admin@1234"))
@@ -25,6 +25,11 @@ public class DataInitializer implements CommandLineRunner {
                     .build();
             adminUserRepository.save(admin);
             System.out.println("✅ Admin user created: username=rashmi_admin, password=Admin@1234");
+        } else {
+            AdminUser admin = adminOpt.get();
+            admin.setPassword(passwordEncoder.encode("Admin@1234"));
+            adminUserRepository.save(admin);
+            System.out.println("✅ Admin user password synchronized successfully!");
         }
     }
 }
