@@ -21,7 +21,7 @@ public class ContactController {
     private EmailService emailService;
 
     @PostMapping
-    public ResponseEntity<ContactMessage> sendMessage(@RequestBody ContactMessage message) {
+    public ResponseEntity<ContactMessage> sendMessage(@jakarta.validation.Valid @RequestBody ContactMessage message) {
         ContactMessage saved = contactRepository.save(message);
         emailService.sendContactNotification(saved);
         return ResponseEntity.ok(saved);

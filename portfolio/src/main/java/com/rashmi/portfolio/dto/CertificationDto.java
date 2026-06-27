@@ -1,6 +1,7 @@
 package com.rashmi.portfolio.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 import lombok.Data;
 import java.time.LocalDate;
 
@@ -11,6 +12,10 @@ public class CertificationDto {
     private String organization;
     private String description;
     private LocalDate issueDate;
+
+    @URL(message = "Image URL must be a valid URL")
     private String imageUrl;
+
+    @URL(message = "Certificate Link must be a valid URL")
     private String certificateLink;
 }

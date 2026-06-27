@@ -3,6 +3,7 @@ import com.rashmi.portfolio.dto.ProjectDto;
 import com.rashmi.portfolio.entity.Project;
 import com.rashmi.portfolio.exception.ResourceNotFoundException;
 import com.rashmi.portfolio.repository.ProjectRepository;
+import com.rashmi.portfolio.util.HtmlSanitizer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -142,28 +143,28 @@ public class ProjectService {
 
     public Project createProject(ProjectDto dto) {
         Project project = Project.builder()
-                .title(dto.getTitle())
-                .shortDescription(dto.getShortDescription())
-                .detailedDescription(dto.getDetailedDescription())
-                .techStack(dto.getTechStack())
+                .title(HtmlSanitizer.sanitize(dto.getTitle()))
+                .shortDescription(HtmlSanitizer.sanitize(dto.getShortDescription()))
+                .detailedDescription(HtmlSanitizer.sanitize(dto.getDetailedDescription()))
+                .techStack(HtmlSanitizer.sanitize(dto.getTechStack()))
                 .githubLink(dto.getGithubLink())
                 .liveLink(dto.getLiveLink())
                 .imageUrl(dto.getImageUrl())
-                .createdDate(dto.getCreatedDate())
+                .createdDate(HtmlSanitizer.sanitize(dto.getCreatedDate()))
                 .build();
         return projectRepository.save(project);
     }
 
     public Project updateProject(Long id, ProjectDto dto) {
         Project project = getProjectById(id);
-        project.setTitle(dto.getTitle());
-        project.setShortDescription(dto.getShortDescription());
-        project.setDetailedDescription(dto.getDetailedDescription());
-        project.setTechStack(dto.getTechStack());
+        project.setTitle(HtmlSanitizer.sanitize(dto.getTitle()));
+        project.setShortDescription(HtmlSanitizer.sanitize(dto.getShortDescription()));
+        project.setDetailedDescription(HtmlSanitizer.sanitize(dto.getDetailedDescription()));
+        project.setTechStack(HtmlSanitizer.sanitize(dto.getTechStack()));
         project.setGithubLink(dto.getGithubLink());
         project.setLiveLink(dto.getLiveLink());
         if (dto.getImageUrl() != null) project.setImageUrl(dto.getImageUrl());
-        project.setCreatedDate(dto.getCreatedDate());
+        project.setCreatedDate(HtmlSanitizer.sanitize(dto.getCreatedDate()));
         return projectRepository.save(project);
     }
 

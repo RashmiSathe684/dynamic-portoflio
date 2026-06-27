@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { getProjects, createProject, updateProject, deleteProject, uploadProjectImage, sortItemsByDate } from '../../../api/services';
 import CustomAlert from '../../../components/CustomAlert';
+import FormInput from '../../../components/FormInput';
 import { FaPlus, FaTrash, FaEdit, FaGithub, FaLink } from 'react-icons/fa';
 
 const EMPTY = {
@@ -125,83 +126,69 @@ export default function AdminProjects() {
       {showForm && (
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-8 bg-brand-surface border border-brand-border/60 p-4 sm:p-8 rounded-3xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-brand-gray ml-1">Project Title *</label>
-              <input
-                type="text"
-                value={form.title}
-                onChange={(e) => setForm({ ...form, title: e.target.value })}
-                required
-                placeholder="e.g. E-Commerce Platform"
-                className="w-full p-4 rounded-2xl bg-brand-bg/40 border border-brand-border/80 text-text-main placeholder-brand-muted/70 focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-              />
-            </div>
+            <FormInput
+              label="Project Title"
+              id="title"
+              value={form.title}
+              onChange={(e) => setForm({ ...form, title: e.target.value })}
+              required
+              placeholder="e.g. E-Commerce Platform"
+            />
 
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-brand-gray ml-1">Project Date</label>
-              <input
-                type="text"
-                value={form.createdDate}
-                onChange={(e) => setForm({ ...form, createdDate: e.target.value })}
-                placeholder="e.g. Jan 2024 - Mar 2024"
-                className="w-full p-4 rounded-2xl bg-brand-bg/40 border border-brand-border/80 text-text-main placeholder-brand-muted/70 focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-              />
-            </div>
+            <FormInput
+              label="Project Date"
+              id="createdDate"
+              value={form.createdDate}
+              onChange={(e) => setForm({ ...form, createdDate: e.target.value })}
+              placeholder="e.g. Jan 2024 - Mar 2024"
+            />
 
-            <div className="md:col-span-2 space-y-2">
-              <label className="text-sm font-bold text-brand-gray ml-1">Short Description</label>
-              <input
-                type="text"
+            <div className="md:col-span-2">
+              <FormInput
+                label="Short Description"
+                id="shortDescription"
                 value={form.shortDescription}
                 onChange={(e) => setForm({ ...form, shortDescription: e.target.value })}
                 placeholder="A brief overview of the project..."
-                className="w-full p-4 rounded-2xl bg-brand-bg/40 border border-brand-border/80 text-text-main placeholder-brand-muted/70 focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
               />
             </div>
 
-            <div className="md:col-span-2 space-y-2">
-              <label className="text-sm font-bold text-brand-gray ml-1">Detailed Description</label>
-              <textarea
+            <div className="md:col-span-2">
+              <FormInput
+                label="Detailed Description"
+                id="detailedDescription"
+                textarea
                 value={form.detailedDescription}
                 onChange={(e) => setForm({ ...form, detailedDescription: e.target.value })}
-                rows={4}
                 placeholder="Talk about the problem, solution, and features..."
-                className="w-full p-4 rounded-2xl bg-brand-bg/40 border border-brand-border/80 text-text-main placeholder-brand-muted/70 focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
               />
             </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-brand-gray ml-1">Tech Stack (comma-separated)</label>
-              <input
-                type="text"
-                value={form.techStack}
-                onChange={(e) => setForm({ ...form, techStack: e.target.value })}
-                placeholder="e.g. React, Node.js, MongoDB"
-                className="w-full p-4 rounded-2xl bg-brand-bg/40 border border-brand-border/80 text-text-main placeholder-brand-muted/70 focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-              />
-            </div>
+            <FormInput
+              label="Tech Stack (comma-separated)"
+              id="techStack"
+              value={form.techStack}
+              onChange={(e) => setForm({ ...form, techStack: e.target.value })}
+              placeholder="e.g. React, Node.js, MongoDB"
+            />
 
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-brand-gray ml-1">GitHub Link</label>
-              <input
-                type="url"
-                value={form.githubLink}
-                onChange={(e) => setForm({ ...form, githubLink: e.target.value })}
-                placeholder="https://github.com/..."
-                className="w-full p-4 rounded-2xl bg-brand-bg/40 border border-brand-border/80 text-text-main placeholder-brand-muted/70 focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-              />
-            </div>
+            <FormInput
+              label="GitHub Link"
+              id="githubLink"
+              type="url"
+              value={form.githubLink}
+              onChange={(e) => setForm({ ...form, githubLink: e.target.value })}
+              placeholder="https://github.com/..."
+            />
 
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-brand-gray ml-1">Live Demo Link</label>
-              <input
-                type="url"
-                value={form.liveLink}
-                onChange={(e) => setForm({ ...form, liveLink: e.target.value })}
-                placeholder="https://..."
-                className="w-full p-4 rounded-2xl bg-brand-bg/40 border border-brand-border/80 text-text-main placeholder-brand-muted/70 focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary outline-none transition-all"
-              />
-            </div>
+            <FormInput
+              label="Live Demo Link"
+              id="liveLink"
+              type="url"
+              value={form.liveLink}
+              onChange={(e) => setForm({ ...form, liveLink: e.target.value })}
+              placeholder="https://..."
+            />
 
             <div className="space-y-4">
               <label className="text-sm font-bold text-brand-gray ml-1">Project Preview Image</label>
