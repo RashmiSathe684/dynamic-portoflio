@@ -22,7 +22,7 @@ export default function AboutSection() {
                 I am a Computer Science Engineering student passionate about starting my professional journey as a Software Developer. My path into programming began with curiosity about how applications function behind the scenes, leading me to dive deep into Java Full Stack development. Through internships, competitive programming, and structured training at Kiran Academy, I've built a strong foundation in core Java, Spring Boot, React, and SQL.
               </p>
               <p>
-                I enjoy translating logical concepts into working applications, often drawing inspiration from everyday challenges—like developing a Campus Attendance System or a WFH Task Manager. I am actively seeking entry-level Software Engineer or Java Developer opportunities where I can apply my skills, learn from senior developers, and contribute to real-world codebases.
+                I thrive on transforming complex logic into elegant, user-centric software, taking pride in building robust backends and seamless user interfaces. I am actively seeking opportunities as a Java Full Stack Developer or Software Engineer to contribute to high-impact projects, collaborate with experienced teams, and continually evolve my technical expertise.
               </p>
             </div>
 
@@ -68,7 +68,7 @@ export default function AboutSection() {
             <div className="space-y-1">
               <h4 className="font-bold text-[14.5px] text-text-main">Education &amp; Training</h4>
               <p className="text-[12.5px] text-brand-gray leading-relaxed">
-                B.Tech in Computer Science with a strong 8.31 CGPA, and completed extensive industry-ready Java Full Stack training at Kiran Academy.
+                B.Tech in Computer Science with a strong 8.33 CGPA, and completed extensive industry-ready Java Full Stack training at Kiran Academy.
               </p>
             </div>
           </div>

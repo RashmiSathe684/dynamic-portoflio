@@ -93,7 +93,7 @@ export default function HeroSection({ profile: initialProfile, onPreview }) {
           {/* Main Title */}
           <h1 className="hero-h1 font-display text-[clamp(34px,5.2vw,54px)] font-bold leading-[1.1] tracking-[-2px] text-text-main">
             Hi, I'm <span className="grad bg-clip-text text-transparent bg-gradient-to-r from-accent to-cyan font-bold">Rashmi Sathe</span><br />
-            Aspiring Java Full Stack Developer
+            Java Full Stack Developer
           </h1>
           
           {/* Punchy Bio Description */}
