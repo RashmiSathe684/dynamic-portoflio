@@ -5,7 +5,7 @@ export const resolveUrl = (url) => {
   if (!url) return '';
   if (url.startsWith('http://') || url.startsWith('https://')) {
     // If it is a Cloudinary image, inject quality, auto-format, and width scale parameters
-    if (url.includes('res.cloudinary.com') && url.includes('/image/upload/')) {
+    if (url.includes('res.cloudinary.com') && url.includes('/image/upload/') && !url.toLowerCase().includes('.pdf')) {
       return url.replace('/image/upload/', '/image/upload/q_auto,f_auto,w_800/');
     }
     return url;
