@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { loginAdmin } from '../../api/services';
-import { FiUser, FiLock, FiArrowRight } from 'react-icons/fi';
+import { FiUser, FiLock, FiArrowRight, FiHome } from 'react-icons/fi';
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -44,8 +44,15 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen bg-brand-bg flex items-center justify-center px-6 relative transition-colors duration-500">
-      {/* Absolute Corner Toggle Switch */}
-      <div className="absolute top-6 right-6 z-50">
+      {/* Absolute Corner Toggle Switch & Home button */}
+      <div className="absolute top-6 right-6 z-50 flex items-center gap-3">
+        <button 
+          className="theme-toggle" 
+          onClick={() => navigate('/')}
+          title="Go to Portfolio Home"
+        >
+          <FiHome size={18} />
+        </button>
         <button 
           className="theme-toggle" 
           onClick={() => setDarkMode(!darkMode)}

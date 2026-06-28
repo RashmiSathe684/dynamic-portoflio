@@ -7,7 +7,7 @@ import AdminCertifications from './modules/AdminCertifications';
 import AdminInternships from './modules/AdminInternships';
 import AdminProfile from './modules/AdminProfile';
 import AdminMessages from './modules/AdminMessages';
-import { FiGrid, FiAward, FiFileText, FiLogOut, FiBriefcase, FiUser, FiMail, FiSun, FiMoon } from 'react-icons/fi';
+import { FiGrid, FiAward, FiFileText, FiLogOut, FiBriefcase, FiUser, FiMail, FiSun, FiMoon, FiHome } from 'react-icons/fi';
 
 const tabs = [
   { id: 'projects', label: 'Projects', icon: FiGrid },
@@ -55,6 +55,14 @@ export default function AdminDashboard() {
             <h2 className="text-4xl font-[800] text-text-main">RS Dashboard</h2>
           </div>
           <div className="flex items-center gap-3">
+            {/* Home button to redirect to portfolio page */}
+            <button 
+              className="theme-toggle" 
+              onClick={() => navigate('/')}
+              title="Go to Portfolio Home"
+            >
+              <FiHome size={18} />
+            </button>
             {/* Theme toggle switch in dashboard header */}
             <button 
               className="theme-toggle" 
