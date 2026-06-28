@@ -53,6 +53,7 @@ A dynamic, recruiter-ready full-stack portfolio site with a secure, JWT-authenti
 * **Profile Media Editor:** Instantly replace your display photo and resume PDF with automated remote Cloudinary catalog synchronization.
 * **Full CRUD Modules:** Create, update, and delete entries for all sections.
 * **Cloud File Uploads:** Upload files directly to Cloudinary CDN from custom dashboards.
+* **Home Redirection:** Quick-access home button next to the theme toggle to navigate back to the public homepage.
 
 ### ⚡ Performance & Caching
 * **Stale-While-Revalidate Caching:** Frontend renders records instantly from `localStorage` on page load, making navigation immediate. It queries the backend API in parallel and updates the local storage cache if differences are found.
