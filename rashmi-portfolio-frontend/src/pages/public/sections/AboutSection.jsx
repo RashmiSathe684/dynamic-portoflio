@@ -61,7 +61,7 @@ export default function AboutSection() {
           </div>
           
           {/* Card 1: Education & Training */}
-          <div className="glass-card p-5 flex items-start gap-4 border-l-4 border-l-accent hover:border-accent/40 transition-all duration-300 hover:translate-x-1 shadow-sm">
+          <div className="glass-card p-5 flex items-start gap-4 border-l-4 border-l-accent hover:border-accent/40 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:translate-x-1 shadow-sm">
             <div className="w-10 h-10 rounded-xl bg-accent/8 text-accent flex items-center justify-center shrink-0 select-none">
               <FiBookOpen size={18} />
             </div>
@@ -74,7 +74,7 @@ export default function AboutSection() {
           </div>
 
           {/* Card 2: Problem Solving & DSA */}
-          <div className="glass-card p-5 flex items-start gap-4 border-l-4 border-l-cyan hover:border-cyan/40 transition-all duration-300 hover:translate-x-1 shadow-sm">
+          <div className="glass-card p-5 flex items-start gap-4 border-l-4 border-l-cyan hover:border-cyan/40 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:translate-x-1 shadow-sm">
             <div className="w-10 h-10 rounded-xl bg-cyan/8 text-cyan flex items-center justify-center shrink-0 select-none">
               <FiCpu size={18} />
             </div>
@@ -87,7 +87,7 @@ export default function AboutSection() {
           </div>
 
           {/* Card 3: End-to-End Projects */}
-          <div className="glass-card p-5 flex items-start gap-4 border-l-4 border-l-pink hover:border-pink/40 transition-all duration-300 hover:translate-x-1 shadow-sm">
+          <div className="glass-card p-5 flex items-start gap-4 border-l-4 border-l-pink hover:border-pink/40 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:translate-x-1 shadow-sm">
             <div className="w-10 h-10 rounded-xl bg-pink/8 text-pink flex items-center justify-center shrink-0 select-none">
               <FiLayout size={18} />
             </div>

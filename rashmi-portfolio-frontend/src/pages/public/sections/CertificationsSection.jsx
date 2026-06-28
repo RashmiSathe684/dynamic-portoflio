@@ -6,15 +6,15 @@ const getCertMeta = (orgName) => {
   if (!orgName) return { icon: <FiFileText size={16} />, bg: 'rgba(148,163,184,0.1)', color: 'var(--muted)', border: '1px solid rgba(148,163,184,0.25)' };
   const o = orgName.toLowerCase();
   if (o.includes('amazon') || o.includes('aws')) {
-    return { icon: <FiCloud size={16} />, bg: 'rgba(253,186,116,0.15)', color: 'var(--peach)', border: '1px solid rgba(253,186,116,0.3)' };
+    return { icon: <FiCloud size={16} />, bg: 'rgba(99,102,241,0.12)', color: 'var(--accent)', border: '1px solid rgba(99,102,241,0.25)' };
   } else if (o.includes('nptel') || o.includes('swayam')) {
     return { icon: <FiAward size={16} />, bg: 'rgba(167,139,250,0.12)', color: 'var(--accent)', border: '1px solid rgba(167,139,250,0.25)' };
   } else if (o.includes('infosys')) {
-    return { icon: <FiBookOpen size={16} />, bg: 'rgba(103,232,249,0.12)', color: 'var(--cyan)', border: '1px solid rgba(103,232,249,0.3)' };
+    return { icon: <FiBookOpen size={16} />, bg: 'rgba(139,92,246,0.12)', color: 'var(--cyan)', border: '1px solid rgba(139,92,246,0.3)' };
   } else if (o.includes('nxtwave')) {
-    return { icon: <FiCpu size={16} />, bg: 'rgba(249,168,212,0.12)', color: 'var(--pink)', border: '1px solid rgba(249,168,212,0.3)' };
+    return { icon: <FiCpu size={16} />, bg: 'rgba(217,70,239,0.12)', color: 'var(--pink)', border: '1px solid rgba(217,70,239,0.3)' };
   } else if (o.includes('linkedin')) {
-    return { icon: <FiBriefcase size={16} />, bg: 'rgba(96,165,250,0.12)', color: '#60A5FA', border: '1px solid rgba(96,165,250,0.25)' };
+    return { icon: <FiBriefcase size={16} />, bg: 'rgba(99,102,241,0.12)', color: 'var(--accent)', border: '1px solid rgba(99,102,241,0.25)' };
   }
   return { icon: <FiFileText size={16} />, bg: 'rgba(148,163,184,0.1)', color: 'var(--muted)', border: '1px solid rgba(148,163,184,0.25)' };
 };

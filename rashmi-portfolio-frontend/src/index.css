@@ -9,46 +9,46 @@
    ════════════════════════════════ */
 :root {
   /* light - Premium Electric Indigo & Royal Violet Theme */
-  --bg:        #F8FAFC;  /* Very clean slate bg */
-  --bg2:       #F1F5F9;  /* Slate secondary bg */
-  --bg3:       #E2E8F0;  /* Slate border/divider */
+  --bg:        #FAF9FD;  /* Very slight violet-white tint */
+  --bg2:       #F4F3F8;  /* Secondary bg */
+  --bg3:       #EBEAF0;  
   --card:      #FFFFFF;
-  --card2:     #F8FAFC;
-  --border:    #E2E8F0;  /* Subtle slate border */
+  --card2:     #FAF9FD;
+  --border:    rgba(99, 102, 241, 0.08);  /* Subtle indigo border */
   --accent:    #6366F1;  /* Electric Indigo */
   --accent-h:  #4F46E5;  /* Deep Indigo Hover */
-  --accent-bg: rgba(99, 102, 241, 0.06);
-  --peach:     #EFF6FF;  
-  --pink:      #A78BFA;  
+  --accent-bg: rgba(99, 102, 241, 0.04);
+  --peach:     #F3F2FA;  
+  --pink:      #A78BFA;  /* Soft Violet */
   --coral:     #EF4444;  
-  --cyan:      #3B82F6;  
-  --h-text:    #0F172A;  /* Slate 900 headings */
-  --body:      #475569;  /* Slate 600 body text */
-  --muted:     #64748B;  /* Slate 500 muted text */
-  --dark:      #0F172A;  
-  --glow:      rgba(99, 102, 241, 0.15);
-  --blob1:     rgba(99, 102, 241, 0.05); 
-  --blob2:     rgba(59, 130, 246, 0.05);  
-  --neu-s1:    0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
-  --neu-s2:    0 1px 3px rgba(0, 0, 0, 0.01);
-  --glass-bg:  rgba(255, 255, 255, 0.85);
-  --glass-bd:  rgba(226, 232, 240, 0.8);
+  --cyan:      #8B5CF6;  /* Royal Violet */
+  --h-text:    #0F0E17;  
+  --body:      #474554;  
+  --muted:     #706E7F;  
+  --dark:      #0F0E17;  
+  --glow:      rgba(99, 102, 241, 0.08);
+  --blob1:     rgba(99, 102, 241, 0.04); 
+  --blob2:     rgba(139, 92, 246, 0.04);  
+  --neu-s1:    0 1px 3px 0 rgba(0, 0, 0, 0.01), 0 8px 24px -4px rgba(99, 102, 241, 0.04);
+  --neu-s2:    none;
+  --glass-bg:  rgba(255, 255, 255, 0.75);
+  --glass-bd:  rgba(99, 102, 241, 0.08);
 
   /* Skills & Category Pill Theme-Aware Colors (High Contrast in Light Mode) */
   --pill-bg-indigo: rgba(99, 102, 241, 0.05);
   --pill-bd-indigo: rgba(99, 102, 241, 0.15);
   --pill-tx-indigo: #6366F1;
 
-  --pill-bg-cyan:   rgba(6, 182, 212, 0.05);
-  --pill-bd-cyan:   rgba(6, 182, 212, 0.15);
-  --pill-tx-cyan:   #0891B2;
+  --pill-bg-cyan:   rgba(139, 92, 246, 0.05);
+  --pill-bd-cyan:   rgba(139, 92, 246, 0.15);
+  --pill-tx-cyan:   #8B5CF6;
 
-  --pill-bg-orange: rgba(244, 63, 94, 0.05);
-  --pill-bd-orange: rgba(244, 63, 94, 0.15);
-  --pill-tx-orange: #E11D48;
+  --pill-bg-orange: rgba(167, 139, 250, 0.05);
+  --pill-bd-orange: rgba(167, 139, 250, 0.15);
+  --pill-tx-orange: #7C3AED;
 
-  --pill-bg-blue:   rgba(79, 70, 229, 0.05);
-  --pill-bd-blue:   rgba(79, 70, 229, 0.15);
+  --pill-bg-blue:   rgba(99, 102, 241, 0.05);
+  --pill-bd-blue:   rgba(99, 102, 241, 0.15);
   --pill-tx-blue:   #4F46E5;
 
   --pill-bg-pink:   rgba(217, 70, 239, 0.05);
@@ -74,43 +74,43 @@
 
 .dark, [data-theme="dark"] {
   /* dark - Premium Deep Slate Theme */
-  --bg:        #0B0F19;  /* Sleek Deep Space Black/Blue */
-  --bg2:       #111827;  /* Dark Gray */
-  --bg3:       #1F2937;  
-  --card:      #111827;  /* Clean card */
-  --card2:     #1F2937;  
-  --border:    #1F2937;  
-  --accent:    #8B5CF6;  /* Royal Violet Glow */
+  --bg:        #07060A;  /* Deep Space Black/Purple */
+  --bg2:       #0C0B11;  
+  --bg3:       #14131D;  
+  --card:      #0E0D14;  
+  --card2:     #14131D;  
+  --border:    rgba(139, 92, 246, 0.12);  /* Violet-black border */
+  --accent:    #8B5CF6;  /* Violet */
   --accent-h:  #7C3AED;  
-  --accent-bg: rgba(139, 92, 246, 0.1);
-  --peach:     #1E1B4B;  
+  --accent-bg: rgba(139, 92, 246, 0.08);
+  --peach:     #12111A;  
   --pink:      #C084FC;  
-  --coral:     #F87171;  
-  --cyan:      #60A5FA;  
+  --coral:     #EF4444;  
+  --cyan:      #A78BFA;  
   --h-text:    #F8FAFC;  
-  --body:      #94A3B8;  /* Very readable slate-gray text */
+  --body:      #94A3B8;  
   --muted:     #64748B;  
   --dark:      #F8FAFC;  
-  --glow:      rgba(139, 92, 246, 0.25);
-  --blob1:     rgba(139, 92, 246, 0.06); 
-  --blob2:     rgba(59, 130, 246, 0.06);  
-  --neu-s1:    0 10px 30px -10px rgba(0, 0, 0, 0.8);
-  --neu-s2:    0 1px 3px rgba(0, 0, 0, 0.6);
-  --glass-bg:  rgba(17, 24, 39, 0.85);
-  --glass-bd:  rgba(255, 255, 255, 0.06);
+  --glow:      rgba(139, 92, 246, 0.16);
+  --blob1:     rgba(139, 92, 246, 0.05); 
+  --blob2:     rgba(99, 102, 241, 0.05);  
+  --neu-s1:    0 0 0 1px rgba(139, 92, 246, 0.12), 0 10px 35px -10px rgba(0, 0, 0, 0.7);
+  --neu-s2:    none;
+  --glass-bg:  rgba(14, 13, 20, 0.75);
+  --glass-bd:  rgba(139, 92, 246, 0.15);
 
   /* Skills & Category Pill Theme-Aware Colors (Pastel Glows in Dark Mode) */
   --pill-bg-indigo: rgba(129, 140, 248, 0.1);
   --pill-bd-indigo: rgba(129, 140, 248, 0.2);
   --pill-tx-indigo: #818CF8;
 
-  --pill-bg-cyan:   rgba(34, 211, 238, 0.1);
-  --pill-bd-cyan:   rgba(34, 211, 238, 0.2);
-  --pill-tx-cyan:   #22D3EE;
+  --pill-bg-cyan:   rgba(167, 139, 250, 0.1);
+  --pill-bd-cyan:   rgba(167, 139, 250, 0.2);
+  --pill-tx-cyan:   #A78BFA;
 
-  --pill-bg-orange: rgba(244, 63, 94, 0.1);
-  --pill-bd-orange: rgba(244, 63, 94, 0.2);
-  --pill-tx-orange: #F43F5E;
+  --pill-bg-orange: rgba(129, 140, 248, 0.1);
+  --pill-bd-orange: rgba(129, 140, 248, 0.2);
+  --pill-tx-orange: #818CF8;
 
   --pill-bg-blue:   rgba(99, 102, 241, 0.1);
   --pill-bd-blue:   rgba(99, 102, 241, 0.2);
@@ -240,7 +240,7 @@ h1, h2, h3, h4 {
   border: 1px solid var(--border);
   color: var(--accent);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   font-family: 'Outfit', sans-serif;
 }
 .admin-btn:hover {
@@ -260,7 +260,7 @@ h1, h2, h3, h4 {
   align-items: center;
   justify-content: center;
   font-size: 17px;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   color: var(--accent);
 }
 .theme-toggle:hover {
@@ -280,16 +280,16 @@ h1, h2, h3, h4 {
   font-size: 13.5px;
   font-weight: 600;
   padding: 12px 28px;
-  border-radius: 9999px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
   font-family: 'Outfit', sans-serif;
-  box-shadow: 0 4px 18px rgba(99, 102, 241, 0.3);
-  transition: all 0.25s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 4px 12px rgba(99, 102, 241, 0.12);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .btn-glow:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.45);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.25);
 }
 
 .btn-glass {
@@ -301,19 +301,19 @@ h1, h2, h3, h4 {
   font-size: 13.5px;
   font-weight: 600;
   padding: 12px 26px;
-  border-radius: 9999px;
+  border-radius: 12px;
   border: 1px solid var(--border);
   cursor: pointer;
   font-family: 'Outfit', sans-serif;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: all 0.25s ease;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .btn-glass:hover {
   border-color: var(--accent);
   color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.1);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.06);
 }
 
 .social-chip {
@@ -456,16 +456,16 @@ h1, h2, h3, h4 {
 .glass-card {
   background: var(--glass-bg);
   border: 1px solid var(--glass-bd);
-  border-radius: 22px;
+  border-radius: 16px;
   padding: 28px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: var(--neu-s1), var(--neu-s2);
-  transition: transform 0.25s, box-shadow 0.25s;
+  box-shadow: var(--neu-s1);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .glass-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 36px var(--glow);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px var(--glow), 0 0 0 1px var(--border);
 }
 
 .about-text {
@@ -1163,11 +1163,12 @@ h1, h2, h3, h4 {
 .form-card {
   background: var(--glass-bg);
   border: 1px solid var(--glass-bd);
-  border-radius: 22px;
+  border-radius: 16px;
   padding: 28px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: var(--neu-s1), var(--neu-s2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--neu-s1);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .form-title {
   font-family: 'Outfit', sans-serif;
@@ -1187,7 +1188,7 @@ h1, h2, h3, h4 {
 }
 .finp {
   width: 100%;
-  background: var(--bg3);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 12px 14px;
@@ -1195,7 +1196,7 @@ h1, h2, h3, h4 {
   font-size: 14px;
   color: var(--body);
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   margin-bottom: 14px;
 }
 .finp:focus {
@@ -1217,19 +1218,19 @@ h1, h2, h3, h4 {
   font-size: 15px;
   font-weight: 700;
   padding: 14px;
-  border-radius: 13px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 6px 22px var(--glow);
-  transition: all 0.25s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 4px 12px rgba(99, 102, 241, 0.12);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
 .fbtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(167, 139, 250, 0.5);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.25);
 }
 
 /* ════════════════════════════════
@@ -1458,4 +1459,26 @@ form input:-webkit-autofill:focus {
   .qc-divider {
     display: none;
   }
+}
+
+/* Custom Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.2);
+  border-radius: 9999px;
+  border: 2px solid var(--bg);
+  transition: background 0.3s;
+}
+.dark ::-webkit-scrollbar-thumb, [data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.2);
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }
