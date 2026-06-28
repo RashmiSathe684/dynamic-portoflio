@@ -106,18 +106,16 @@ const refreshPortfolioCache = () => {
     API.get('/api/projects', { params: { page: 0, size: 100 } }),
     API.get('/api/achievements', { params: { page: 0, size: 100 } }),
     API.get('/api/certifications', { params: { page: 0, size: 100 } }),
-    API.get('/api/internships'),
-    API.get('/api/education')
+    API.get('/api/internships')
   ])
-  .then(([profileRes, skillsRes, projectsRes, achievementsRes, certificationsRes, internshipsRes, educationRes]) => {
+  .then(([profileRes, skillsRes, projectsRes, achievementsRes, certificationsRes, internshipsRes]) => {
     const data = {
       profile: profileRes.data,
       skills: skillsRes.data,
       projects: projectsRes.data?.content || [],
       achievements: achievementsRes.data?.content || [],
       certifications: certificationsRes.data?.content || [],
-      internships: internshipsRes.data || [],
-      education: educationRes.data || []
+      internships: internshipsRes.data || []
     };
     localStorage.setItem('portfolio_data', JSON.stringify(data));
   })
@@ -184,11 +182,6 @@ export const uploadInternshipFile = (file) => {
   fd.append('file', file);
   return API.post('/api/internships/upload', fd);
 };
-
-// EDUCATION
-export const getEducation = () => API.get('/api/education');
-export const createEducation = withCacheRefresh((data) => API.post('/api/education', data));
-export const deleteEducation = withCacheRefresh((id) => API.delete(`/api/education/${id}`));
 
 // SKILLS
 export const getSkills = () => API.get('/api/skills');

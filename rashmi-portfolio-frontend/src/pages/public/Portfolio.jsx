@@ -8,7 +8,6 @@ import ProjectsSection from './sections/ProjectsSection';
 import AchievementsSection from './sections/AchievementsSection';
 import CertificationsSection from './sections/CertificationsSection';
 import InternshipSection from './sections/InternshipSection';
-import EducationSection from './sections/EducationSection';
 import ContactSection from './sections/ContactSection';
 import { 
   getPortfolioDetails,
@@ -17,8 +16,7 @@ import {
   getProjects,
   getAchievements,
   getCertifications,
-  getInternships,
-  getEducation
+  getInternships
 } from '../../api/services';
 
 export default function Portfolio() {
@@ -47,9 +45,8 @@ export default function Portfolio() {
         getProjects({ page: 0, size: 100 }),
         getAchievements({ page: 0, size: 100 }),
         getCertifications({ page: 0, size: 100 }),
-        getInternships(),
-        getEducation()
-      ]).then(([profileRes, skillsRes, projectsRes, achievementsRes, certificationsRes, internshipsRes, educationRes]) => {
+        getInternships()
+      ]).then(([profileRes, skillsRes, projectsRes, achievementsRes, certificationsRes, internshipsRes]) => {
         return {
           data: {
             profile: profileRes.data,
@@ -57,8 +54,7 @@ export default function Portfolio() {
             projects: projectsRes.data?.content || [],
             achievements: achievementsRes.data?.content || [],
             certifications: certificationsRes.data?.content || [],
-            internships: internshipsRes.data || [],
-            education: educationRes.data || []
+            internships: internshipsRes.data || []
           }
         };
       });
@@ -173,9 +169,6 @@ export default function Portfolio() {
         <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
         
         <InternshipSection internships={portfolioData?.internships} onPreview={setPreviewImage} />
-        <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
-        
-        <EducationSection education={portfolioData?.education} />
         <div className="w-full h-[1px] bg-brand-border/40 max-w-6xl mx-auto opacity-50"></div>
         
         <ContactSection />

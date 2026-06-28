@@ -7,13 +7,11 @@ import AdminCertifications from './modules/AdminCertifications';
 import AdminInternships from './modules/AdminInternships';
 import AdminProfile from './modules/AdminProfile';
 import AdminMessages from './modules/AdminMessages';
-import AdminEducation from './modules/AdminEducation';
-import { FiGrid, FiAward, FiFileText, FiLogOut, FiBriefcase, FiUser, FiMail, FiSun, FiMoon, FiBook } from 'react-icons/fi';
+import { FiGrid, FiAward, FiFileText, FiLogOut, FiBriefcase, FiUser, FiMail, FiSun, FiMoon } from 'react-icons/fi';
 
 const tabs = [
   { id: 'projects', label: 'Projects', icon: FiGrid },
   { id: 'internships', label: 'Internships', icon: FiBriefcase },
-  { id: 'education', label: 'Education', icon: FiBook },
   { id: 'achievements', label: 'Achievements', icon: FiAward },
   { id: 'certifications', label: 'Certifications', icon: FiFileText },
   { id: 'profile', label: 'Profile Settings', icon: FiUser },
@@ -104,7 +102,6 @@ export default function AdminDashboard() {
             >
               {activeTab === 'projects' && <AdminProjects />}
               {activeTab === 'internships' && <AdminInternships />}
-              {activeTab === 'education' && <AdminEducation />}
               {activeTab === 'achievements' && <AdminAchievements />}
               {activeTab === 'certifications' && <AdminCertifications />}
               {activeTab === 'profile' && <AdminProfile />}

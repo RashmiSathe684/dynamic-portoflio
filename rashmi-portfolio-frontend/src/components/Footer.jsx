@@ -53,9 +53,7 @@ export default function Footer() {
             <div className="footer-links flex flex-col gap-[7px]">
               <button onClick={() => scrollTo('certifications')} className="text-left text-[13px] text-brand-gray hover:text-accent transition-colors">Certifications</button>
               <button onClick={() => scrollTo('experience')} className="text-left text-[13px] text-brand-gray hover:text-accent transition-colors">Experience</button>
-              <button onClick={() => scrollTo('education')} className="text-left text-[13px] text-brand-gray hover:text-accent transition-colors">Education</button>
               <button onClick={() => scrollTo('contact')} className="text-left text-[13px] text-brand-gray hover:text-accent transition-colors">Contact</button>
-
             </div>
           </div>
         </div>

@@ -59,11 +59,6 @@ async function fetchPortfolioData() {
     const internshipsRes = await client.query('SELECT * FROM internships ORDER BY id DESC');
     const internships = snakeToCamel(internshipsRes.rows);
 
-    // Fetch Education
-    console.log('Fetching education...');
-    const educationRes = await client.query('SELECT * FROM education ORDER BY id ASC');
-    const education = snakeToCamel(educationRes.rows);
-
     // Assemble dynamic details matching the PortfolioDetailsDto
     const portfolioDetails = {
       profile,
@@ -71,8 +66,7 @@ async function fetchPortfolioData() {
       projects,
       achievements,
       certifications,
-      internships,
-      education
+      internships
     };
 
     const __dirname = path.dirname(fileURLToPath(import.meta.url));

@@ -11,7 +11,6 @@ const links = [
   'Achievements',
   'Certifications',
   'Experience',
-  'Education',
   'Contact'
 ];
 

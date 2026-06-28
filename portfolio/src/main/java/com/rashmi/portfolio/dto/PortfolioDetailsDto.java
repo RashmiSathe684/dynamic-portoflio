@@ -14,5 +14,4 @@ public class PortfolioDetailsDto {
     private List<Achievement> achievements;
     private List<Certification> certifications;
     private List<Internship> internships;
-    private List<Education> education;
 }

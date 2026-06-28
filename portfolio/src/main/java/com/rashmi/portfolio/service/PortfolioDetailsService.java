@@ -14,7 +14,6 @@ public class PortfolioDetailsService {
     private final AchievementService achievementService;
     private final CertificationService certificationService;
     private final InternshipService internshipService;
-    private final EducationService educationService;
 
     public PortfolioDetailsDto getPortfolioDetails() {
         return PortfolioDetailsDto.builder()
@@ -24,7 +23,6 @@ public class PortfolioDetailsService {
                 .achievements(achievementService.getAll(0, 100).getContent())
                 .certifications(certificationService.getAll(0, 100).getContent())
                 .internships(internshipService.getAllInternships())
-                .education(educationService.getAllEducation())
                 .build();
     }
 }
